@@ -2,7 +2,7 @@ import "../styles/global.css";
 
 import Navbar from "@/components/Navbar";
 import Provider from "@/components/Provider";
-
+import {NextUIProvider} from "@nextui-org/react";
 export const metadata = {
   title: "Faculty Flow",
   description: "Discover & Share AI Prompts",
