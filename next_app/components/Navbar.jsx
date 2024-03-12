@@ -7,19 +7,59 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Navbar = () => {
   const { data: session } = useSession();
-
+  
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-
+  const [title,setTitle]=useState('a');
+  const [arrival,setArrival]=useState('a');
+  const [departure,setDeparture]=useState('a');
+  const [price,setPrice]=useState(0);
+  const [type,setType]=useState('a');
+  const [place,setPlace]=useState('a');
+  const [comment,setComment]=useState('a');
+  const [link,setLink]=useState('a');
+ 
   useEffect(() => {
     (async () => {
       const res = await getProviders();
       setProviders(res);
     })();
   }, []);
+  
+  const createPrompt = async (e) => {
+   
+    e.preventDefault();
+    
+
+    try {
+      const response = await fetch("/api/funds/new", {
+        method: "POST",
+        body: JSON.stringify({
+         title:title,
+         place:place,
+         arrival:arrival,
+         departure:departure,
+         price:price,
+         comment:comment,
+         link:link,
+         type:type,
+          userId: session?.user.id,
+          
+        }),
+      });
+
+      if (response.ok) {
+        router.push("/");
+      }
+      console.log('hi');
+    } catch (error) {
+      console.log(error);
+    } 
+  };
 
   return (
     <nav className='flex-between w-full mb-16 pt-3'>
+      
       <Link href='/' className='flex gap-2 flex-center'>
         <Image
           src='/assets/images/Chatbot.png'
