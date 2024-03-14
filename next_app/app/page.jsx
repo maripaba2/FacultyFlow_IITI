@@ -10,9 +10,18 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {NextUIProvider} from '@nextui-org/react'
 import Sidebar from "@components/Sidebar/Sidebar"
+
+import Chatbot from "../components/chatbot2";
+import Bot from "../components/buttonChatbot";
+
+
 // import Search from "@components/Search"
 const Home = () => (
+  
+
+    
   <section className="w-full flex-center flex-col">
+   
     <h1 className="head_text text-center">
       Welcome to
       <br className="max-md:hidden" />
@@ -72,6 +81,7 @@ const Home = () => (
     </div>
 
   </section>
+  
   // <section><Funds/></section>
   // <section><Search/></section>
 );
