@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@components/Sidebar/Sidebar";
-import Card from "@components/Cards/detailBar"
+import Detailbar from "@components/Cards/detailBar"
+import "@components/Cards/cardscss.css"
 const page = () => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -117,27 +118,20 @@ const page = () => {
           </button>
           <br />
           <br />
-          <table className="table w-full bt-5">
-            <thead className="bg-gray-800 text-white">
-            </thead>
-            <tbody>
+          <div className="">
+            <div className="cardd">
               {allPosts.map((post, index) => (
-                <tr key={post._id} className="bg-white">
-                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                    {post.arrival}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
-                    {post._id}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
+
+                <div key={post._id} className="bg-white">
+                  <Detailbar arrival={post.arrival} _id={post._id} functionA={handleDelete}/>
+                  <div className="flex relative" style={{top:"-5rem", left:"9rem", position:"relative"}}>
                     <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2" onClick={() => { handleDelete(post); }}> Delete</button>
-                    <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded" onClick={() => { updatePrompt(post); }}> Edit
-                    </button>
-                  </td>
-                </tr>
+                    <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded" onClick={() => { updatePrompt(post); }}> Edit </button>
+                  </div>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
       </div>
       <div className="col-span-1">
