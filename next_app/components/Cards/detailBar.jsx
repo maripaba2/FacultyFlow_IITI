@@ -1,6 +1,6 @@
 
 
-export default function RootLayout({ _id, arrival }) {
+export default function RootLayout({ place, arrival }) {
   return (
     <div className="shadow-md w-[45vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100 m-4" style={{width:"47rem", fontFamily:"Poppins"}}>
       
@@ -8,7 +8,7 @@ export default function RootLayout({ _id, arrival }) {
         <div className="flex flex-col">
        
           <h3 className="C3 text-lg font-bold ml-7 mt-1.5">Title</h3>
-            <h2>{_id } is the id</h2>
+            <h2>{place } is the place</h2>
             <h2>{arrival}is the arrival date</h2>
         </div>
         <div className="flex text-[0.65rem] justify-space-around mt-1">

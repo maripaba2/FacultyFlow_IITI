@@ -2,6 +2,7 @@ import "../styles/global.css";
 
 import Navbar from "@/components/Navbar";
 import Provider from "@/components/Provider";
+import Bot from "@/components/buttonChatbot"
 import {NextUIProvider} from "@nextui-org/react";
 export const metadata = {
   title: "Faculty Flow",
@@ -17,7 +18,7 @@ const RootLayout = ({ children }) => (
         <div className='main'>
           <div className='gradient' />
         </div>
-
+          <Bot/>
         <main className='app'>
           <Navbar />
           {children}

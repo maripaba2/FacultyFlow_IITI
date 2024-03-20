@@ -6,6 +6,7 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@components/Sidebar/Sidebar";
 import Detailbar from "@components/Cards/detailBar"
+// import Add from "@components/Cards/addDetailBar"
 import "@components/Cards/cardscss.css"
 const page = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const page = () => {
     const response = await fetch("/api/funds");
     const fundsdata = await response.json();
     const filteredPosts = fundsdata.filter(
-      (item) => item.creator._id === session?.user.id
+      (item) => item.creator._id === session?.user?.id
     );
 
     setAllPosts(filteredPosts);
@@ -122,8 +123,8 @@ const page = () => {
             <div className="cardd">
               {allPosts.map((post, index) => (
 
-                <div key={post._id} className="bg-white">
-                  <Detailbar arrival={post.arrival} _id={post._id} functionA={handleDelete}/>
+                <div key={post._id} className="bg-transparent">
+                  <Detailbar arrival={post.arrival} place={post.place} functionA={handleDelete}/>
                   <div className="flex relative" style={{top:"-5rem", left:"9rem", position:"relative"}}>
                     <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2" onClick={() => { handleDelete(post); }}> Delete</button>
                     <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded" onClick={() => { updatePrompt(post); }}> Edit </button>
@@ -131,6 +132,39 @@ const page = () => {
                 </div>
               ))}
             </div>
+            <form>
+      <div className="shadow-md w-[45vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100 m-4">
+          <div className="w-[93%] bg-transparent border-2 border-peela rounded-l-large flex">
+              <input type='text' className="text-xl font-bold ml-7 mt-1.5 h-[1.5rem] w-[80%]" placeholder="Title" required />
+              <div className="flex text-[0.65rem] justify-space-around mt-1 translate-x-[-20%]">
+                  <div className="w-[35%] translate-y-[32%] translate-x-[-130%]">
+                      {/* <h4 className="-mb-0.5 text-nowrap"><span>Place</span><span>: </span><span><input type='text' className="w-[80%]" /></span></h4>
+                      <h4 className="-mb-0.5 text-clip"><span>Departure</span><span>: </span><span>Time/Date</span></h4>
+                      <h4 className="-mb-0.5 text-nowrap"><span>Arrival</span><span>: </span><span>Time/Date</span></h4>
+                      <h4 className="-mb-0.5 text-nowrap"><span>Type</span><span>: </span><span>Type</span></h4> */}
+                      <input onChange={(e) => setPlace(e.target.value)}  ontype='text' className="w-[80%] mb-0.5" placeholder="Place" required />
+                      <input onChange={(e) => setDeparture(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Departure" required />
+                      <input onChange={(e) => setArrival(e.target.value)} ontype='text' className="w-[80%] mb-0.5" placeholder="Arrival" required />
+                      <input onChange={(e) => setType(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Type" required />
+                  </div>
+                  <div className="w-[35%] translate-y-[36%] ml-10 translate-x-[-50%]">
+                      <input onChange={(e) => setLink(e.target.value)} type='text' className="leading-[0.775rem] h-[57%] text-start text-pretty" placeholder="Comment" required />
+                  </div>
+              </div>
+              <div>
+                <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
+                <div className="flex w-[30%] translate-x-[-190%] mt-[6.5vh]" >
+                  <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250">View</button>
+                  <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button>
+                </div>
+              </div>       
+          </div>
+          <button  onClick={createPrompt} className="flex justify-between bg-peela duration-250 w-[7%] h-[100%] hover:bg-amber-400 hover:duration-100 rounded-r-large border-2 border-amber-600">
+              <img src = "Plus.png" className="h-[3.5vh] m-auto"/>
+          </button>
+      </div>
+    </form>
+
           </div>
         </div>
       </div>
