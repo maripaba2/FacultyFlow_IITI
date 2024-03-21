@@ -5,9 +5,18 @@ import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@components/Sidebar/Sidebar";
-import Detailbar from "@components/Cards/detailBar"
+import Detailbar from "@components/Cards/detailBar";
 // import Add from "@components/Cards/addDetailBar"
 import "@components/Cards/cardscss.css"
+import {Poppins, Roboto} from '@next/font/google'
+import { ScrollShadow } from "@nextui-org/react";
+
+const roboto = Poppins({
+  subsets:['latin'],
+  weight:'300',
+  fontSize:'50px'
+  
+})
 const page = () => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -111,37 +120,37 @@ const page = () => {
     }
   };
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-4" >
       <div className="col-span-2">
         <div className="adi">
-          <button onClick={createPrompt} className="mt-5 w-full black_btn">
+          <button onClick={createPrompt} className="mt-5 w-full black_btn" style={{position:'relative', left:"-5rem"}}>
             larva
           </button>
           <br />
           <br />
-          <div className="">
-            <div className="cardd">
+          <div className="" >
+
+          <ScrollShadow hideScrollBar className="w-[768px] h-[800px]" style={{position:'relative', left:"-5rem"}}>
+            <div className={`w-[22rem] ${roboto.className}`}>
               {allPosts.map((post, index) => (
 
                 <div key={post._id} className="bg-transparent">
-                  <Detailbar arrival={post.arrival} place={post.place} functionA={handleDelete}/>
+                  <Detailbar arrival={post.arrival} place={post.place} functionA={handleDelete} className={`${roboto.className}`} style={{fontSize:"30px"}}/>
                   <div className="flex relative" style={{top:"-5rem", left:"9rem", position:"relative"}}>
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2" onClick={() => { handleDelete(post); }}> Delete</button>
-                    <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded" onClick={() => { updatePrompt(post); }}> Edit </button>
+                    <button className="bg-blue-500 hover:bg-blue-600 text-white mx-3 px-3 py-2 rounded mr-2" onClick={() => { handleDelete(post); }}> DELETE</button>
+                    <button className="bg-red-500 hover:bg-red-600 text-white mx-3 px-3 py-2 rounded" onClick={() => { updatePrompt(post); }}> VIEW </button>
                   </div>
                 </div>
               ))}
             </div>
+            </ScrollShadow>
+
             <form>
-      <div className="shadow-md w-[45vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100 m-4">
+      <div className={`shadow-md w-[39vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100 m-4 text-xl ${roboto.className}`} style={{position:'relative', left:"-5rem"}}>
           <div className="w-[93%] bg-transparent border-2 border-peela rounded-l-large flex">
               <input type='text' className="text-xl font-bold ml-7 mt-1.5 h-[1.5rem] w-[80%]" placeholder="Title" required />
               <div className="flex text-[0.65rem] justify-space-around mt-1 translate-x-[-20%]">
                   <div className="w-[35%] translate-y-[32%] translate-x-[-130%]">
-                      {/* <h4 className="-mb-0.5 text-nowrap"><span>Place</span><span>: </span><span><input type='text' className="w-[80%]" /></span></h4>
-                      <h4 className="-mb-0.5 text-clip"><span>Departure</span><span>: </span><span>Time/Date</span></h4>
-                      <h4 className="-mb-0.5 text-nowrap"><span>Arrival</span><span>: </span><span>Time/Date</span></h4>
-                      <h4 className="-mb-0.5 text-nowrap"><span>Type</span><span>: </span><span>Type</span></h4> */}
                       <input onChange={(e) => setPlace(e.target.value)}  ontype='text' className="w-[80%] mb-0.5" placeholder="Place" required />
                       <input onChange={(e) => setDeparture(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Departure" required />
                       <input onChange={(e) => setArrival(e.target.value)} ontype='text' className="w-[80%] mb-0.5" placeholder="Arrival" required />
@@ -160,7 +169,7 @@ const page = () => {
               </div>       
           </div>
           <button  onClick={createPrompt} className="flex justify-between bg-peela duration-250 w-[7%] h-[100%] hover:bg-amber-400 hover:duration-100 rounded-r-large border-2 border-amber-600">
-              <img src = "Plus.png" className="h-[3.5vh] m-auto"/>
+              <Image alt='logo' width={20} height={40} src="/assets/images/Plus.png" className="h-[3.5vh] m-auto object-contain ml-3"/>
           </button>
       </div>
     </form>
