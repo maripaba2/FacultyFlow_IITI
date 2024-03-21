@@ -210,7 +210,7 @@ const page = () => {
               </div>       
           </div>
           <button  onClick={createPrompt} className="flex justify-between bg-peela duration-250 w-[7%] h-[100%] hover:bg-amber-400 hover:duration-100 rounded-r-large border-2 border-amber-600">
-              <img src = "Plus.png" className="h-[3.5vh] m-auto"/>
+          <Image alt='logo' width={20} height={40} src="/assets/images/Plus.png" className="h-[3.5vh] m-auto object-contain ml-3"/>
           </button>
       </div>
     </form>
