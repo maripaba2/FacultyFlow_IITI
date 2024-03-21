@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 
-const FundsSchema = new Schema({
+const InventorySchema = new Schema({
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -13,26 +13,32 @@ const FundsSchema = new Schema({
     type:String,
    required: [true, 'Place is required!']
  },
- departure:{
+ department:{
     type:String,
-    required: [true, 'Departure is required!']
+    required: [true, 'Department is required!']
  },
  arrival:{
     type:String,
     required: [true, 'Arrival is required!']
  },
- type:{
+ deadline:{
     type:String,
-    required: [true, 'Type is required!']
- },
- comment:{
-    type:String,
-    required: [true, 'Comment is required!']
+    required: [true, 'Deadline is required!']
  },
  price:{
-    type:Number,
+    type:String,
     required: [true, 'Price is required!']
  },
+ task:{
+    type:String,
+    required: [true, 'Task is required!']
+ },
+ company:{
+    type:String,
+    required: [true, 'Company is required!']
+ },
+ 
+ 
  link:{
     type:String,
     
@@ -46,6 +52,6 @@ const FundsSchema = new Schema({
   
 });
 
-const Funds = models.Funds || model("Funds", FundsSchema);
+const Inventory = models.Inventory || model("Inventory", InventorySchema);
 
-export default Funds;
+export default Inventory;

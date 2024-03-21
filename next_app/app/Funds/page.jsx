@@ -6,8 +6,19 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@components/Sidebar/Sidebar";
 import Detailbar from "@components/Cards/detailBar"
+import SearchCoins from "@components/SearchCoins";
 // import Add from "@components/Cards/addDetailBar"
 import "@components/Cards/cardscss.css"
+
+import {Poppins, Roboto} from '@next/font/google'
+import { ScrollShadow } from "@nextui-org/react";
+
+const roboto = Poppins({
+  subsets:['latin'],
+  weight:'300',
+  fontSize:'50px'
+  
+})
 const page = () => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -22,20 +33,31 @@ const page = () => {
   const [comment, setComment] = useState("a");
   const [link, setLink] = useState("a");
   const [allPosts, setAllPosts] = useState([]);
-  const fetchPosts = async () => {
-    const response = await fetch("/api/funds");
+  const [query, setQuery] = useState('')
+
+  const handleSubmit = async () => {
+    
+
+    const response = await fetch(`/api/funds/search?query=${query}`)
+   
     const fundsdata = await response.json();
-    const filteredPosts = fundsdata.filter(
-      (item) => item.creator._id === session?.user?.id
-    );
+    // const filteredPosts = fundsdata.filter(
+    //   (item) => item.creator._id === session?.user?.id
+    // );
+    
+    setAllPosts(fundsdata);
+    
+   };
+   useEffect(() => {
+    handleSubmit();
+  },[allPosts]);
+  
 
-    setAllPosts(filteredPosts);
-  };
+  
 
-  useEffect(() => {
-    fetchPosts();
-  });
-
+ 
+  
+  
   const handleDelete = async (post) => {
     const hasConfirmed = confirm("Are you sure you want to delete this fund?");
 
@@ -89,14 +111,14 @@ const page = () => {
       const response = await fetch(`/api/funds/${post._id.toString()}`, {
         method: "PATCH",
         body: JSON.stringify({
-          title: "b",
-          place: "b",
-          arrival: "b",
-          departure: "b",
-          price: 1000,
-          comment: "b",
-          link: "b",
-          type: "b",
+          title:title,
+          place:place ,
+          arrival:arrival,
+          departure: departure,
+          price:price,
+          comment: comment,
+          link:link,
+          type: type,
         }),
       });
 
@@ -110,32 +132,60 @@ const page = () => {
       console.log("Edited.");
     }
   };
+  const handleEdit = (post) => {
+    router.push(`/update-prompt?id=${post._id}`);
+  };
+
   return (
     <div className="grid grid-cols-3 gap-4">
       <div className="col-span-2">
         <div className="adi">
-          <button onClick={createPrompt} className="mt-5 w-full black_btn">
-            larva
-          </button>
+         
+          <div className="text-center">
+      
+      <div className="text-center ">
+        <form onSubmit={() => { handleSubmit(); }} >
+            <input className="text-black border-2 border-black rounded-full px-3 py-2" type="text" placeholder="Search " value={query} onChange={(e) => setQuery(e.target.value)} />
+            {/* <button className="bg-black text-white rounded-full px-3 py-2 hover:bg-black/60" type="submit"  >Search</button> */}
+        </form>
+    </div>
+      
+   </div>
           <br />
           <br />
           <div className="">
-            <div className="cardd">
+            {/* <div className="cardd">
               {allPosts.map((post, index) => (
 
                 <div key={post._id} className="bg-transparent">
                   <Detailbar arrival={post.arrival} place={post.place} functionA={handleDelete}/>
                   <div className="flex relative" style={{top:"-5rem", left:"9rem", position:"relative"}}>
                     <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2" onClick={() => { handleDelete(post); }}> Delete</button>
-                    <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded" onClick={() => { updatePrompt(post); }}> Edit </button>
+                    <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded" onClick={() => { handleEdit(post); }}> Edit </button>
                   </div>
                 </div>
               ))}
+            </div> */}
+            
+          <ScrollShadow hideScrollBar className="w-[768px] h-[800px]" style={{position:'relative', left:"-5rem"}}>
+            <div className={`w-[22rem] ${roboto.className}`}>
+              {allPosts.map((post, index) => (
+
+                <div key={post._id} className="bg-transparent">
+                  <Detailbar  key={post._id} arrival={post.arrival} place={post.place} title={post.title} departure={post.departure} price={post.price} comment={post.cooment}
+                  type={post.type} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} className={`${roboto.className}`} style={{fontSize:"30px"}}/>
+                  {/* <div className="flex relative" style={{top:"-5rem", left:"9rem", position:"relative"}}>
+                    <button className="bg-blue-500 hover:bg-blue-600 text-white mx-3 px-3 py-2 rounded mr-2" onClick={() => { handleDelete(post); }}> DELETE</button>
+                    <button className="bg-red-500 hover:bg-red-600 text-white mx-3 px-3 py-2 rounded" onClick={() => { handleEdit(post); }}> VIEW </button>
+                  </div> */}
+                </div>
+              ))}
             </div>
+            </ScrollShadow>
             <form>
       <div className="shadow-md w-[45vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100 m-4">
           <div className="w-[93%] bg-transparent border-2 border-peela rounded-l-large flex">
-              <input type='text' className="text-xl font-bold ml-7 mt-1.5 h-[1.5rem] w-[80%]" placeholder="Title" required />
+              <input type='text' className="text-xl font-bold ml-7 mt-1.5 h-[1.5rem] w-[80%]"onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
               <div className="flex text-[0.65rem] justify-space-around mt-1 translate-x-[-20%]">
                   <div className="w-[35%] translate-y-[32%] translate-x-[-130%]">
                       {/* <h4 className="-mb-0.5 text-nowrap"><span>Place</span><span>: </span><span><input type='text' className="w-[80%]" /></span></h4>

@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 
-const FundsSchema = new Schema({
+const TravelSchema = new Schema({
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -29,10 +29,7 @@ const FundsSchema = new Schema({
     type:String,
     required: [true, 'Comment is required!']
  },
- price:{
-    type:Number,
-    required: [true, 'Price is required!']
- },
+ 
  link:{
     type:String,
     
@@ -46,6 +43,6 @@ const FundsSchema = new Schema({
   
 });
 
-const Funds = models.Funds || model("Funds", FundsSchema);
+const Travel = models.Travel || model("Travel", TravelSchema);
 
-export default Funds;
+export default Travel;

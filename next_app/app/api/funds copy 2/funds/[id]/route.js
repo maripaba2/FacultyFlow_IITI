@@ -1,23 +1,23 @@
 import Funds from "@models/funds";
 import { connectToDB } from "@utils/database";
 
-// export const GET = async (request, { params }) => {
-//     try {
-//         await connectToDB()
+export const GET = async (request, { params }) => {
+    try {
+        await connectToDB()
 
-//         const funds = await Funds.findById(params.id).populate("creator")
-//         if (!funds) return new Response("Funds Not Found", { status: 404 });
+        const funds = await Funds.findById(params.id).populate("creator")
+        if (!funds) return new Response("Funds Not Found", { status: 404 });
 
-//         return new Response(JSON.stringify(funds), { status: 200 })
+        return new Response(JSON.stringify(funds), { status: 200 })
 
-//     } catch (error) {
-//         return new Response
-//         ("Internal terver Error", { status: 500 });
-//     }
-// }
+    } catch (error) {
+        return new Response
+        ("Internal Server Error", { status: 500 });
+    }
+}
 
 export const PATCH = async (request, { params }) => {
-    const {title, arrival} = await request.json();
+    const {title,place, arrival,departure,price,comment, type} = await request.json();
 
     try {
         await connectToDB();
@@ -29,18 +29,18 @@ export const PATCH = async (request, { params }) => {
             return new Response("Funds not found", { status: 404 });
         }
         existingFunds.title=title;
-        // existingFunds.place=place;
+        existingFunds.place=place;
         existingFunds.arrival=arrival;
-        // existingFunds.departure=departure;
-        // existingFunds.price=price;
-        // existingFunds.comment=comment;
-        // existingFunds.link=link;
-        // existingFunds.type=type;
+        existingFunds.departure=departure;
+        existingFunds.price=price;
+        existingFunds.comment=comment;
+       
+        existingFunds.type=type;
              
         
 
         await existingFunds.save();
-        console.log("akanksha");
+
         return new Response("Successfully updated the Funds", { status: 200 });
     } catch (error) {
         return new Response("Error Updating Funds", { status: 500 });

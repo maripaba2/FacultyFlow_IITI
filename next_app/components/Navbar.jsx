@@ -103,7 +103,7 @@ const Navbar = () => {
                   onClick={() => {
                     signIn(provider.id);
                   }}
-                  className='black_btn'
+                  className='outline_btn'
                 >
                   Sign in
                 </button>
