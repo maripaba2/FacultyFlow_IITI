@@ -17,6 +17,8 @@ const roboto = Poppins({
   fontSize:'50px'
   
 })
+
+
 const page = () => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -120,23 +122,24 @@ const page = () => {
     }
   };
   return (
+    <div>
     <div className="grid grid-cols-3 gap-4" >
       <div className="col-span-2">
         <div className="adi">
-          <button onClick={createPrompt} className="mt-5 w-full black_btn" style={{position:'relative', left:"-5rem"}}>
-            larva
-          </button>
+          {/* <button onClick={createPrompt} className="mt-5 w-full black_btn" style={{position:'relative', left:"-5rem"}}>
+            inven_larva
+          </button> */}
           <br />
           <br />
           <div className="" >
-
-          <ScrollShadow hideScrollBar className="w-[768px] h-[800px]" style={{position:'relative', left:"-5rem"}}>
+        
+          <ScrollShadow hideScrollBar className="w-[768px] h-[600px]" style={{position:'relative', left:"-5rem"}}>
             <div className={`w-[22rem] ${roboto.className}`}>
               {allPosts.map((post, index) => (
 
                 <div key={post._id} className="bg-transparent">
                   <Detailbar arrival={post.arrival} place={post.place} functionA={handleDelete} className={`${roboto.className}`} style={{fontSize:"30px"}}/>
-                  <div className="flex relative" style={{top:"-5rem", left:"9rem", position:"relative"}}>
+                  <div className="flex relative" style={{top:"-5rem", left:"33rem", position:"relative", width:"5rem"}}>
                     <button className="bg-blue-500 hover:bg-blue-600 text-white mx-3 px-3 py-2 rounded mr-2" onClick={() => { handleDelete(post); }}> DELETE</button>
                     <button className="bg-red-500 hover:bg-red-600 text-white mx-3 px-3 py-2 rounded" onClick={() => { updatePrompt(post); }}> VIEW </button>
                   </div>
@@ -162,10 +165,10 @@ const page = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
-                <div className="flex w-[30%] translate-x-[-190%] mt-[6.5vh]" >
+                {/* <div className="flex w-[30%] translate-x-[-190%] mt-[6.5vh]" >
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250">View</button>
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button>
-                </div>
+                </div> */}
               </div>       
           </div>
           <button  onClick={createPrompt} className="flex justify-between bg-peela duration-250 w-[7%] h-[100%] hover:bg-amber-400 hover:duration-100 rounded-r-large border-2 border-amber-600">
@@ -178,8 +181,9 @@ const page = () => {
         </div>
       </div>
       <div className="col-span-1">
-        <Sidebar />
+        <Sidebar sidebartitle={"REMAINING FUNDS"}/>
       </div>
+    </div>
     </div>
   );
 };
