@@ -15,6 +15,12 @@ module.exports = {
       },
       colors: {
         'primary-orange': '#FF5722',
+        'off-white': '#FBFBFB',
+        'peela': '#FFDE58',
+        'halka-laal': '#FB8A8A',
+        'dark-halka-laal': '#CB6868',
+        'halka-peela': '#FCFF7E',
+        'darker-halka-laal': "#FF6767",
       }
     },
   },
