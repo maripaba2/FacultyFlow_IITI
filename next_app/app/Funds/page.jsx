@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { BsSearch } from 'react-icons/bs';
 import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -34,27 +35,63 @@ const page = () => {
   const [link, setLink] = useState("a");
   const [allPosts, setAllPosts] = useState([]);
   const [query, setQuery] = useState('')
-
-  const handleSubmit = async () => {
+  // const [products, setProducts] = useState(productList);
+    const [searchVal, setSearchVal] = useState("");
+    
+  // const handleSubmit = async () => {
     
 
-    const response = await fetch(`/api/funds/search?query=${query}`)
+  //   const response = await fetch(`/api/funds/search`)
    
+  //   const fundsdata = await response.json();
+  //   // const filteredPosts = fundsdata.filter(
+  //   //   (item) => item.creator._id === session?.user?.id
+  //   // );
+    
+  //   setAllPosts(fundsdata);
+    
+  //  };
+  //  useEffect(() => {
+  //   handleSubmit();
+  // });
+  const fetchPosts = async () => {
+    const response = await fetch("/api/funds");
     const fundsdata = await response.json();
-    // const filteredPosts = fundsdata.filter(
-    //   (item) => item.creator._id === session?.user?.id
-    // );
-    
-    setAllPosts(fundsdata);
-    
-   };
-   useEffect(() => {
-    handleSubmit();
-  },[allPosts]);
-  
+    const filteredPosts = fundsdata.filter(
+      (item) => item.creator._id === session?.user.id
+    );
 
-  
+    setAllPosts(filteredPosts);
+  };
 
+  // useEffect(() => {
+  //   fetchPosts;
+  // },[allPosts])
+   
+  
+ const handleSearchClick= async ()=> {
+    
+    const response = await fetch("/api/funds");
+    const fundsdata = await response.json();
+    const filteredPosts = fundsdata.filter(
+      (item) => item.creator._id === session?.user.id
+    );
+
+
+    setAllPosts(filteredPosts);
+   
+    if (searchVal === "") {  return; }
+    const filterBySearch = allPosts.filter((fund) => {
+      console.log(searchVal.toLowerCase());
+      return fund.title.toLowerCase().includes(searchVal.toLowerCase()) || fund.place.toLowerCase().includes(searchVal.toLowerCase());
+      
+    })
+    setAllPosts(filterBySearch);
+}
+  
+useEffect(() => {
+  handleSearchClick();
+},[allPosts])
  
   
   
@@ -142,13 +179,12 @@ const page = () => {
         <div className="adi">
          
           <div className="text-center">
+          <div >
+                <input className="text-black border-2 border-black rounded-full px-3 py-2" type="text" placeholder="Search " onChange={e => setSearchVal(e.target.value)}>
+                </input>
+                
+            </div>
       
-      <div className="text-center ">
-        <form onSubmit={() => { handleSubmit(); }} >
-            <input className="text-black border-2 border-black rounded-full px-3 py-2" type="text" placeholder="Search " value={query} onChange={(e) => setQuery(e.target.value)} />
-            {/* <button className="bg-black text-white rounded-full px-3 py-2 hover:bg-black/60" type="submit"  >Search</button> */}
-        </form>
-    </div>
       
    </div>
           <br />

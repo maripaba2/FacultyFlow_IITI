@@ -14,11 +14,11 @@ const FundsSchema = new Schema({
    required: [true, 'Place is required!']
  },
  departure:{
-    type:String,
+    type:Date,
     required: [true, 'Departure is required!']
  },
  arrival:{
-    type:String,
+    type:Date,
     required: [true, 'Arrival is required!']
  },
  type:{
@@ -35,7 +35,7 @@ const FundsSchema = new Schema({
  },
  link:{
     type:String,
-    
+    required: [true, 'Link is required!']
  }
 
 

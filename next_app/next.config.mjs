@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false, // Disable React Strict Mode
+
   experimental: {
     appDir: true,
     serverComponentsExternalPackages: ["mongoose"],
@@ -15,4 +17,5 @@ const nextConfig = {
     return config
   }
 }
+
 export default nextConfig;
