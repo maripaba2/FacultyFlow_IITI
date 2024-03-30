@@ -133,7 +133,7 @@ const page = () => {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-4 overflow">
+    <div className="grid grid-cols-3 gap-4 ">
       <div className="col-span-2">
         <div className="adi">
          
@@ -163,7 +163,7 @@ const page = () => {
               ))}
             </div> */}
             
-          <ScrollShadow hideScrollBar className={`${roboto.className} dbcf w-[45vw] h-[50vh] relative`}>
+          <ScrollShadow hideScrollBar className={`${roboto.className} dbcf w-[45vw] h-[50vh] relative `}>
               {allPosts.map((post, index) => (
                 <>
                   <Detailbar  key={post._id} arrival={post.arrival} place={post.place} title={post.title} departure={post.departure} price={post.price} comment={post.cooment}

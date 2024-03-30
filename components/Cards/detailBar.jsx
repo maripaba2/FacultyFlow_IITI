@@ -1,5 +1,4 @@
 
-
 import Link from "next/link";
 import Image from "next/image";
 
@@ -8,18 +7,17 @@ export default function RootLayout( props ) {
     <div className="db shadow-md w-[100%] h-[18%] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100">
       
       <div className="w-[93%] bg-transparent border-2 border-peela rounded-l-large flex">
-        <div className="flex flex-col align-center content-center pl-20 pt-3">       
-          <h1 className="C3 font-bold ml-7 mt-1.5" style={{fontSize:"30px"}}>{ props.title }</h1>
+        <div className=" w-[45%] flex flex-col align-center content-center  pt-3" style={{paddingLeft:"2rem"}}>       
+          <h1 className="C3 font-bold ml-0 mt-0" style={{fontSize:"1.5rem"}}><u>{ props.title }</u></h1>
             <h2 style={{fontSize:"14px"}}>Place:{ props.place } </h2>
             <h2 style={{fontSize:"14px"}}>Arrival:{ props.arrival }</h2>
             <h2 style={{fontSize:"14px"}}>Type:{ props.type }</h2>
             <h2 style={{fontSize:"14px"}}>Departure:{props.departure }</h2>
-            {/* <h2 style={{fontSize:"14px"}}>{arrival}</h2>
-            <h2 style={{fontSize:"14px"}}>{arrival}</h2>
-            <h2 style={{fontSize:"14px"}}>{arrival}</h2> */}
         </div>
-        <div className="flex justify-space-around mt-1">
-
+        <div className="flex-col justify-space-around mt-2 ml-3 w-[30%]"style={{fontSize:"0.8rem"}}>
+              {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, vel dolorum libero voluptates reprehenderit */}
+              <label htmlFor="myInput">Comments:</label><br/>
+              <input type="text" id="myInput" className="w-[90%] h-[70%] pl-1 pt-1" />
       </div>
         <div className="flex translate-x-[-4%] mt-[10.5vh] z-10 m-auto" style={{zIndex:"10"}}>
           <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250" onClick={props.handleEdit}>Edit</button>
