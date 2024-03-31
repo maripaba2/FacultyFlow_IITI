@@ -2,8 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import Upload from '../upload';
 
 export default function RootLayout( props ) {
+  const linked = (link) => {
+    return "https://drive.google.com/file/d/" + link;
+  }
+
   return (
     <div className="db shadow-md w-[100%] h-[18%] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100">
       
@@ -23,8 +28,11 @@ export default function RootLayout( props ) {
       </div>
         <div className="flex translate-x-[-4%] mt-[10.5vh] z-10 m-auto" style={{zIndex:"10"}}>
           <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250" onClick={props.handleEdit}>Edit</button>
-          { props.link && <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button> }
-          { !props.link && <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">Upload</button> }
+          { props.link && <a href={linked(props.link)}><button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button></a> }
+          { !props.link && 
+            <Upload id = {props.id} userid = {props.userid} email = {props.email}/>
+          // <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">Upload</button> 
+          }
         </div>
         <h3 className="C3 text-xl font-bold mt-1.5 mr-5 text-nowrap">{ props.price }</h3>
       </div>

@@ -19,7 +19,8 @@ const roboto = Poppins({
   weight:'300',
   fontSize:'50px'
   
-})
+});
+
 const page = () => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -34,11 +35,10 @@ const page = () => {
   const [comment, setComment] = useState("a");
   const [link, setLink] = useState("a");
   const [allPosts, setAllPosts] = useState([]);
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState('');
+  console.log("BEEP! BEEP!");
 
   const handleSubmit = async () => {
-    
-
     const response = await fetch(`/api/funds/search?query=${query}`)
    
     const fundsdata = await response.json();
@@ -52,8 +52,18 @@ const page = () => {
    useEffect(() => {
     handleSubmit();
   },[allPosts]);
-  
 
+  const getUserId = async () => {
+    const uid = await session?.user.id;   
+    return uid;
+  }
+
+  const getEmail = async () => {
+    const email = await session?.user.email;
+    console.log(email);
+    return email;
+  }
+  
   const handleDelete = async (post) => {
     const hasConfirmed = confirm("Are you sure you want to delete this fund?");
 
@@ -142,7 +152,6 @@ const page = () => {
       <div className="text-center">
         <form onSubmit={() => { handleSubmit(); }} >
             <input className="text-black border-2 border-black rounded-full px-3 py-2" type="text" placeholder="Search " value={query} onChange={(e) => setQuery(e.target.value)} />
-            {/* <button className="bg-black text-white rounded-full px-3 py-2 hover:bg-black/60" type="submit"  >Search</button> */}
         </form>
     </div>
       
@@ -150,24 +159,11 @@ const page = () => {
           <br />
           <br />
           <div className="">
-            {/* <div className="cardd">
-              {allPosts.map((post, index) => (
-
-                <div key={post._id} className="bg-transparent">
-                  <Detailbar arrival={post.arrival} place={post.place} functionA={handleDelete}/>
-                  <div className="flex relative" style={{top:"-5rem", left:"9rem", position:"relative"}}>
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mr-2" onClick={() => { handleDelete(post); }}> Delete</button>
-                    <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded" onClick={() => { handleEdit(post); }}> Edit </button>
-                  </div>
-                </div>
-              ))}
-            </div> */}
-            
           <ScrollShadow hideScrollBar className={`${roboto.className} dbcf w-[45vw] h-[50vh] relative`}>
-              {allPosts.map((post, index) => (
+              {session && allPosts.map((post, index) => (
                 <>
                   <Detailbar  key={post._id} arrival={post.arrival} place={post.place} title={post.title} departure={post.departure} price={post.price} comment={post.cooment}
-                  type={post.type} link = {post.link} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
+                  type={post.type} link = {post.link} id = {post._id} userid = {getUserId()} email = {getEmail()} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
                   <br />
                 </>
               ))}

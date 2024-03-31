@@ -107,4 +107,5 @@ input:focus{
   background-size: 80%;
   /* background-position: (-5%, -50%); */
   background-position: -100% 20%;
+  backdrop-filter: blur(100%);
 }
