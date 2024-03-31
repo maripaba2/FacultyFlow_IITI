@@ -16,19 +16,20 @@ export const GET = async (request) => {
         
         const endOfWeek = new Date(startOfWeek);
         
-endOfWeek.setDate(startOfWeek.getDate() - 7);
+endOfWeek.setDate(startOfWeek.getDate() + 7);
         
         const filteredFunds = funds.filter(fund => {
             const arrivalDate = new Date(fund.arrival);
             // return arrivalDate.getMonth() === currentMonth;
-            return (arrivalDate <= startOfWeek &&
-            arrivalDate >= endOfWeek );
+            return (arrivalDate >= startOfWeek &&
+            arrivalDate <= endOfWeek );
         });
 
         const deadlineDates = filteredFunds.map(fund => {
             const arrivalDate = new Date(fund.arrival);
             return {
-                fundId: fund._id, // Include fund ID if needed
+                fundId: fund._id,
+                name:fund.title, // Include fund ID if needed
                 deadlineDate: new Date(arrivalDate.setDate(arrivalDate.getDate()+1)) // Set the deadline to be one day before the arrival
             };
         });

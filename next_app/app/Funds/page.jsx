@@ -172,7 +172,11 @@ useEffect(() => {
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
   };
-
+  const currentDate = new Date();
+  const filteredPosts = allPosts
+  .filter(post => new Date(post.arrival) >= currentDate) // Filter posts with arrival dates after or equal to currentDate
+  .sort((a, b) => new Date(a.arrival) - new Date(b.arrival)) // Sort posts by ascending order of arrival dates
+  .slice(0, 4);
   return (
     <div className="grid grid-cols-3 gap-4">
       <div className="col-span-2">
@@ -206,8 +210,9 @@ useEffect(() => {
           <ScrollShadow hideScrollBar className="w-[768px] h-[800px]" style={{position:'relative', left:"-5rem"}}>
             <div className={`w-[22rem] ${roboto.className}`}>
               {allPosts.map((post, index) => (
-
+                  
                 <div key={post._id} className="bg-transparent">
+                  
                   <Detailbar  key={post._id} arrival={post.arrival} place={post.place} title={post.title} departure={post.departure} price={post.price} comment={post.cooment}
                   type={post.type} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} className={`${roboto.className}`} style={{fontSize:"30px"}}/>
                   {/* <div className="flex relative" style={{top:"-5rem", left:"9rem", position:"relative"}}>
@@ -255,7 +260,22 @@ useEffect(() => {
         </div>
       </div>
       <div className="col-span-1">
-        <Sidebar />
+      <div className="sidebarall font-roboto items-center">
+  <h2 className="text-center" style={{ fontSize: "2rem" }}>REMAINING TASKS</h2>
+  <div className="shadow-md w-[32vw] h-[45vh] bg-transparent border-3 border-yellow-400 rounded-l-large rounded-medium text-gray-700 hover:bg-gray-100 m-4 flex flex-wrap">
+    {filteredPosts.map((post, index) => (
+      <div key={index} className="w-1/2 flex flex-col">
+        <section className="mt-7 mb-7 mr-4 ml-7 rounded-large hover:bg-yellow-400 text-center pt-2 bg-yellow-300 h-[15vh] hover:translate-y-[-3px] transition duration-300">
+          {post.title}<br />
+          
+          Deadline: {post.arrival}<br />
+          Task: {post.comment}
+        </section>
+      </div>
+    ))}
+  </div>
+</div>
+
       </div>
     </div>
   );

@@ -34,21 +34,25 @@ function Home(){
                   
                   const endOfWeek = new Date(startOfWeek);
                   
-      endOfWeek.setDate(startOfWeek.getDate() - 7);
+      endOfWeek.setDate(startOfWeek.getDate() + 7);
       
 
                   // const endOfWeek = new Date(startOfWeek.getDate() + 7);
                   // endOfWeek.setDate(startOfWeek.); // Set to the last day of the week (Saturday)
                   
                   if (
-                      deadlineDate <= startOfWeek &&
-                      deadlineDate >= endOfWeek &&
+                      deadlineDate >= startOfWeek &&
+                      deadlineDate <= endOfWeek &&
                       !displayedFundIds.includes(item.fundId)
                   )
                   console.log('yeah');
                   {
-                      toast(`The deadline is within the current week at: ${item.deadlineDate}`);
-                      setDisplayedFundIds(prevIds => [...prevIds, item.fundId]);
+                    {const year = deadlineDate.getFullYear();
+                      const month = String(deadlineDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+                      const day = String(deadlineDate.getDate()).padStart(2, '0');
+                        toast.warn(`The deadline for ${item.name} is within the current week at: ${year}-${month}-${day} `);
+                        setDisplayedFundIds(prevIds => [...prevIds, item.fundId]);
+                    }
                   }
               });
           } catch (error) {

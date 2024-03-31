@@ -4,6 +4,16 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function RootLayout({ place, arrival,title,departure,type,price,comment,handleDelete,handleEdit }) {
+  const deadlineDate=new Date(arrival);
+  const year = deadlineDate.getFullYear();
+    const month = String(deadlineDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(deadlineDate.getDate()+1).padStart(2, '0');
+    const deadlineData=new Date(departure);
+    const year2 = deadlineData.getFullYear();
+      const month2 = String(deadlineData.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+      const day2 = String(deadlineData.getDate()+1).padStart(2, '0');
+       
+  
   return (
     <div className="shadow-md w-[45vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100 m-4" style={{width:"47rem", height:"10rem"}}>
       
@@ -11,9 +21,9 @@ export default function RootLayout({ place, arrival,title,departure,type,price,c
         <div className="flex flex-col align-center content-center pl-20 pt-3">       
           <h1 className="C3  font-bold ml-7 mt-1.5" style={{fontSize:"30px"}}>{title}</h1>
             <h2 style={{fontSize:"14px"}}>Place:{place } </h2>
-            <h2 style={{fontSize:"14px"}}>Arrival:{arrival}</h2>
+            <h2 style={{fontSize:"14px"}}>Arrival:{year}-{month}-{day}</h2>
             <h2 style={{fontSize:"14px"}}>Type:{type}</h2>
-            <h2 style={{fontSize:"14px"}}>Departure:{departure}</h2>
+            <h2 style={{fontSize:"14px"}}>Departure:{year}-{month}-{day}</h2>
             {/* <h2 style={{fontSize:"14px"}}>{arrival}</h2>
             <h2 style={{fontSize:"14px"}}>{arrival}</h2>
             <h2 style={{fontSize:"14px"}}>{arrival}</h2> */}
