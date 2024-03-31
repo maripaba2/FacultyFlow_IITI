@@ -14,6 +14,7 @@ const page = () => {
   
       setAllPosts(filteredPosts);
     };
+    
   
     useEffect(() => {
       fetchPosts();

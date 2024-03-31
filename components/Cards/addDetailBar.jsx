@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import "../app/globals.css";
+// import "../app/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,39 +16,38 @@ function printit(){
   console.log("hello aditya");
 }
 
+
+
 export default function RootLayout({ children }) {
   return (
-    <form>
-      <div className="shadow-md w-[45vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100 m-4">
+    <form>       
+        <div className="shadow-md w-[45vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100">
           <div className="w-[93%] bg-transparent border-2 border-peela rounded-l-large flex">
-              <input type='text' className="text-xl font-bold ml-7 mt-1.5 h-[1.5rem] w-[80%]" placeholder="Title" required />
+              <input type='text' className="text-xl font-bold ml-7 mt-1.5 h-[1.5rem] w-[80%]"onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
               <div className="flex text-[0.65rem] justify-space-around mt-1 translate-x-[-20%]">
                   <div className="w-[35%] translate-y-[32%] translate-x-[-130%]">
-                      {/* <h4 className="-mb-0.5 text-nowrap"><span>Place</span><span>: </span><span><input type='text' className="w-[80%]" /></span></h4>
-                      <h4 className="-mb-0.5 text-clip"><span>Departure</span><span>: </span><span>Time/Date</span></h4>
-                      <h4 className="-mb-0.5 text-nowrap"><span>Arrival</span><span>: </span><span>Time/Date</span></h4>
-                      <h4 className="-mb-0.5 text-nowrap"><span>Type</span><span>: </span><span>Type</span></h4> */}
-                      <input type='text' className="w-[80%] mb-0.5" placeholder="Place" required />
-                      <input type='text' className="w-[80%] mb-0.5" placeholder="Departure" required />
-                      <input type='text' className="w-[80%] mb-0.5" placeholder="Arrival" required />
-                      <input type='text' className="w-[80%] mb-0.5" placeholder="Type" required />
+
+                      <input onChange={(e) => setPlace(e.target.value)}  type='text' className="w-[80%] mb-0.5" placeholder="Place" required />
+                      <input onChange={(e) => setDeparture(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Departure" required />
+                      <input onChange={(e) => setArrival(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Arrival" required />
+                      <input onChange={(e) => setType(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Type" required />
                   </div>
                   <div className="w-[35%] translate-y-[36%] ml-10 translate-x-[-50%]">
-                      <input type='text' className="leading-[0.775rem] h-[57%] text-start text-pretty" placeholder="Comment" required />
+                      <input onChange={(e) => setComment(e.target.value)} type='text' className="leading-[0.775rem] h-[57%] text-start text-pretty" placeholder="Comment" required />
                   </div>
               </div>
               <div>
-                <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
+                <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input onChange={(e) => setPrice(e.target.value)} className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
                 <div className="flex w-[30%] translate-x-[-190%] mt-[6.5vh]" >
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250">View</button>
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button>
                 </div>
               </div>       
           </div>
-          <button onClick={addEntry()} className="flex justify-between bg-peela duration-250 w-[7%] h-[100%] hover:bg-amber-400 hover:duration-100 rounded-r-large border-2 border-amber-600">
-              <img alt='logo' src="/assets/images/Plus.png" className="m-auto w-[60%]"/>
+          <button  onClick={createPrompt} className="flex justify-between bg-peela duration-250 w-[7%] h-[100%] hover:bg-amber-400 hover:duration-100 rounded-r-large border-2 border-amber-600">
+          <img alt='logo' src="/assets/images/Plus.png" className="m-auto object-contain w-[60%]"/>
           </button>
-      </div>
-    </form>
+        </div>
+      </form>
   );
 }

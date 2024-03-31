@@ -8,13 +8,13 @@ export default function RootLayout( props ) {
       
       <div className="w-[93%] bg-transparent border-2 border-peela rounded-l-large flex">
         <div className=" w-[45%] flex flex-col align-center content-center  pt-3" style={{paddingLeft:"2rem"}}>       
-          <h1 className="C3 font-bold ml-0 mt-1" style={{fontSize:"1.5rem"}}><u>{ props.title }</u></h1>
+          <h1 className="C3 font-bold ml-0 mt-0" style={{fontSize:"1.5rem"}}><u>{ props.title }</u></h1>
             <h2 style={{fontSize:"14px"}}>Place:{ props.place } </h2>
             <h2 style={{fontSize:"14px"}}>Arrival:{ props.arrival }</h2>
             <h2 style={{fontSize:"14px"}}>Type:{ props.type }</h2>
             <h2 style={{fontSize:"14px"}}>Departure:{props.departure }</h2>
         </div>
-        <div className="flex-col justify-space-around mt-3 ml-3 w-[30%]"style={{fontSize:"0.8rem"}}>
+        <div className="flex-col justify-space-around mt-2 ml-3 w-[30%]"style={{fontSize:"0.8rem"}}>
               {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, vel dolorum libero voluptates reprehenderit */}
               <label >Comments:</label><br/>
               <h2 className="w-[90%] h-[70%] pl-1 pt-1" >{props.comment}</h2>
@@ -34,4 +34,3 @@ export default function RootLayout( props ) {
     </div>
   );
 }
-//<Image src='/assets/images/Trash.png' alt='logo' width={50} height={50} className='object-contain'/>
