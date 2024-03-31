@@ -28,12 +28,12 @@ const page = () => {
      <div className="w-[100%] bg-transparent border-peela rounded-r-large rounded-l-large flex justify-between items-center px-4" style={{ borderWidth: "3px", height:"4.6rem" }}>
     <div className="flex flex-col ml-8">
        <h1 className="mt-0 C3 font-bold text-x">{post.title}</h1>
-      <h3 className="text-sm font-semibold text-blue-900">Entry 1:{post.entry} </h3>
-      <h3 className="text-sm font-semibold text-blue-900">Entry 2: </h3>
+      <h3 className="text-sm font-semibold text-blue-900">Added/deleted :{post.entry} </h3>
+      <h3 className="text-sm font-semibold text-blue-900">Type :{post.type} </h3>
     </div>
     <div className="mt-6 mr-6"> 
-      <h3 className="text-sm font-semibold text-blue-900">Entry 3: </h3>
-      <h3 className="text-sm font-semibold text-blue-900">Entry 4: </h3>
+      <h3 className="text-sm font-semibold text-blue-900">Price:{post.price} </h3>
+      <h3 className="text-sm font-semibold text-blue-900">Added/deleted on :{post.date} </h3>
     </div>
   </div>
 </div>

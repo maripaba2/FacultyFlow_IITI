@@ -20,6 +20,10 @@ const LogsSchema = new Schema({
  price:{
    type:Number,
    required: [true, 'price is required!']
+},
+date:{
+   type:String,
+   required: [true, 'entry is required!']
 }
 });
 

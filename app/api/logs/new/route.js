@@ -4,14 +4,15 @@ import { connectToDB } from "@utils/database";
 export const POST = async (request) => {
     try {
         await connectToDB();
-        const { userId, title, type, entry, price } = await request.json();
+        const { userId, title, type, entry, price, date } = await request.json();
 
         const newLog = new Logs({
             creator: userId,
             title: title,
             type: type,
             entry: entry,
-            price: price
+            price: price,
+            date :date
         });
         console.log(newLog);
         await newLog.save();

@@ -74,6 +74,7 @@ const page = () => {
             type: post.type,
             entry : entry,
             price: post.price,
+            date :new Date().toDateString()
           }),
         });
 
@@ -117,6 +118,7 @@ const page = () => {
           type: type,
           entry : entry,
           price: price,
+          date : new Date().toDateString()
         }),
       });
 
