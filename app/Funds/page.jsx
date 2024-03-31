@@ -214,12 +214,11 @@ const page = () => {
                   </div>
               </div>
               <div>
-<<<<<<< HEAD
+
                 <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input className="w-[50%] h-[1.5rem]" onChange={(e) => setPrice(e.target.value)}  type='text' placeholder="/-" /></h1>
-=======
+
                 <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input onChange={(e) => setPrice(e.target.value)} className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
->>>>>>> 6b238012caa26af08a202b1219c7510b121b604f
-                <div className="flex w-[30%] translate-x-[-190%] mt-[6.5vh]" >
+               <div className="flex w-[30%] translate-x-[-190%] mt-[6.5vh]" >
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250">View</button>
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button>
                 </div>
