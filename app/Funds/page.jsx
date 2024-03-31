@@ -56,12 +56,25 @@ const page = () => {
   
 
   const handleDelete = async (post) => {
+    const mid = await session?.user.id;
     const hasConfirmed = confirm("Are you sure you want to delete this fund?");
 
     if (hasConfirmed) {
       try {
         await fetch(`/api/funds/${post._id.toString()}`, {
           method: "DELETE",
+        });
+
+        const entry="Deleted";
+        const response2 = await fetch("/api/logs/new", {
+          method: "POST",
+          body: JSON.stringify({
+            userId: mid,
+            title: post.title,
+            type: post.type,
+            entry : entry,
+            price: post.price,
+          }),
         });
 
         const filteredPosts = Funds.filter((item) => item._id !== post._id);
@@ -92,6 +105,18 @@ const page = () => {
           link: link,
           type: type,
           userId: mid,
+        }),
+      });
+
+      const entry="Added";
+      const response2 = await fetch("/api/logs/new", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: mid,
+          title: title,
+          type: type,
+          entry : entry,
+          price: price,
         }),
       });
 
