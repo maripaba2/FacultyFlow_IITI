@@ -56,9 +56,26 @@ const page = () => {
 
   const handleDelete = async (post) => {
     const hasConfirmed = confirm("Are you sure you want to delete this fund?");
-
+    const mid = await session?.user.id;
     if (hasConfirmed) {
       try {
+
+        const entry="Deleted";
+        const response2 = await fetch("/api/logs/new", {
+          method: "POST",
+          body: JSON.stringify({
+            userId: mid,
+            title: post.title,
+            type: post.type,
+            entry : entry,
+            price: post.price,
+          }),
+        });
+        console.log("Rishi1");
+        if (response2.ok) {
+          // console.log("Rishi");
+        }
+
         await fetch(`/api/funds/${post._id.toString()}`, {
           method: "DELETE",
         });
@@ -94,8 +111,23 @@ const page = () => {
         }),
       });
 
+      const entry="Added";
+      const response2 = await fetch("/api/logs/new", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: mid,
+          title: title,
+          type: post.type,
+          entry : entry,
+          price: price,
+        }),
+      });
+
       if (response.ok) {
         router.push("/Funds");
+      }
+      if (response2.ok) {
+        console.log("Added");
       }
       console.log("hi");
     } catch (error) {
@@ -192,7 +224,7 @@ const page = () => {
                   </div>
               </div>
               <div>
-                <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
+                <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input className="w-[50%] h-[1.5rem]" onChange={(e) => setPrice(e.target.value)}  type='text' placeholder="/-" /></h1>
                 <div className="flex w-[30%] translate-x-[-190%] mt-[6.5vh]" >
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250">View</button>
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button>

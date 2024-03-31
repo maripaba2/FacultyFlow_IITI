@@ -75,8 +75,8 @@ const Navbar = () => {
       <div className='sm:flex hidden'>
         {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
-            <Link href='/create-prompt' className='black_btn'>
-              Create Post
+            <Link href='/CalLog' className='black_btn'>
+             Calender and Logs
             </Link>
 
             <button type='button' onClick={signOut} className='outline_btn'>
