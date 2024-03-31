@@ -17,7 +17,7 @@ export const GET = async (request, { params }) => {
 }
 
 export const PATCH = async (request, { params }) => {
-    const {title,place, arrival,departure,price,comment,link, type,company} = await request.json();
+    const {title,place, arrival,department,deadline,price,task,link,company} = await request.json();
 
     try {
         await connectToDB();
@@ -31,11 +31,11 @@ export const PATCH = async (request, { params }) => {
         existingInventory.title=title;
         existingInventory.place=place;
         existingInventory.arrival=arrival;
-        existingInventory.departure=departure;
+        existingInventory.department=department;
         existingInventory.price=price;
-        existingInventory.comment=comment;
+        existingInventory.task=task;
         existingInventory.link=link;
-        existingInventory.type=type;
+        existingInventory.deadline=deadline;
         existingInventory.company=company;
              
         

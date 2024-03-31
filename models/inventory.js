@@ -18,11 +18,11 @@ const InventorySchema = new Schema({
     required: [true, 'Department is required!']
  },
  arrival:{
-    type:String,
+    type:Date,
     required: [true, 'Arrival is required!']
  },
  deadline:{
-    type:String,
+    type:Date,
     required: [true, 'Deadline is required!']
  },
  price:{

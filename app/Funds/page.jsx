@@ -56,12 +56,26 @@ const page = () => {
   
 
   const handleDelete = async (post) => {
+    const mid = await session?.user.id;
     const hasConfirmed = confirm("Are you sure you want to delete this fund?");
 
     if (hasConfirmed) {
       try {
         await fetch(`/api/funds/${post._id.toString()}`, {
           method: "DELETE",
+        });
+
+        const entry="Deleted";
+        const response2 = await fetch("/api/logs/new", {
+          method: "POST",
+          body: JSON.stringify({
+            userId: mid,
+            title: post.title,
+            type: post.type,
+            entry : entry,
+            price: post.price,
+            date :new Date().toDateString()
+          }),
         });
 
         const filteredPosts = Funds.filter((item) => item._id !== post._id);
@@ -92,6 +106,19 @@ const page = () => {
           link: link,
           type: type,
           userId: mid,
+        }),
+      });
+
+      const entry="Added";
+      const response2 = await fetch("/api/logs/new", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: mid,
+          title: title,
+          type: type,
+          entry : entry,
+          price: price,
+          date : new Date().toDateString()
         }),
       });
 
@@ -132,6 +159,11 @@ const page = () => {
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
   };
+  const currentDate = new Date();
+  const filteredPosts = allPosts
+  .filter(post => new Date(post.arrival) >= currentDate) // Filter posts with arrival dates after or equal to currentDate
+  .sort((a, b) => new Date(a.arrival) - new Date(b.arrival)) // Sort posts by ascending order of arrival dates
+  .slice(0, 4);
 
   return (
     <div className="grid grid-cols-3 gap-4 ">

@@ -28,11 +28,12 @@ const page = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const [title, setTitle] = useState("a");
   const [arrival, setArrival] = useState("a");
-  const [departure, setDeparture] = useState("a");
+  const [deadline, setDeadline] = useState("a");
+  const [department, setDepartment] = useState("a");
   const [price, setPrice] = useState(0);
-  const [type, setType] = useState("a");
+  const [task, setTask] = useState("a");
   const [place, setPlace] = useState("a");
-  const [comment, setComment] = useState("a");
+  const [company, setCompany] = useState("a");
   const [link, setLink] = useState("a");
   const [allPosts, setAllPosts] = useState([]);
   const [query, setQuery] = useState('')
@@ -40,7 +41,7 @@ const page = () => {
   const handleSubmit = async () => {
     
 
-    const response = await fetch(`/api/funds/search?query=${query}`)
+    const response = await fetch(`/api/inventories/search?query=${query}`)
    
     const fundsdata = await response.json();
     // const filteredPosts = fundsdata.filter(
@@ -60,7 +61,7 @@ const page = () => {
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/funds/${post._id.toString()}`, {
+        await fetch(`/api/inventories/${post._id.toString()}`, {
           method: "DELETE",
         });
 
@@ -80,23 +81,24 @@ const page = () => {
     const mid = await session?.user.id;
 
     try {
-      const response = await fetch("/api/funds/new", {
+      const response = await fetch("/api/inventories/new", {
         method: "POST",
         body: JSON.stringify({
-          title: title,
-          place: place,
-          arrival: arrival,
-          departure: departure,
-          price: price,
-          comment: comment,
-          link: link,
-          type: type,
-          userId: mid,
+          title:title,
+          place:place ,
+          arrival:arrival,
+          department:department,
+          deadline:deadline,
+          price:price,
+          company: company,
+          link:link,
+          task: task,
+         
         }),
       });
 
       if (response.ok) {
-        router.push("/Funds");
+        router.push("/Inventory");
       }
       console.log("hi");
     } catch (error) {
@@ -105,22 +107,24 @@ const page = () => {
   };
   const updatePrompt = async (post) => {
     try {
-      const response = await fetch(`/api/funds/${post._id.toString()}`, {
+      const response = await fetch(`/api/inventories/${post._id.toString()}`, {
         method: "PATCH",
         body: JSON.stringify({
           title:title,
           place:place ,
           arrival:arrival,
-          departure: departure,
+          department:department,
+          deadline:deadline,
           price:price,
-          comment: comment,
+          company: company,
           link:link,
-          type: type,
+          task: task,
+          
         }),
       });
-
+      
       if (response.ok) {
-        router.push("/Funds");
+        router.push("/Inventory");
       }
     } catch (error) {
       console.log(error);
@@ -132,6 +136,11 @@ const page = () => {
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
   };
+  const currentDate = new Date();
+  const filteredPosts = allPosts
+  .filter(post => new Date(post.arrival) >= currentDate) // Filter posts with arrival dates after or equal to currentDate
+  .sort((a, b) => new Date(a.arrival) - new Date(b.arrival)) // Sort posts by ascending order of arrival dates
+  .slice(0, 4);
 
   return (
     <div className="grid grid-cols-3 gap-4 ">
@@ -154,8 +163,8 @@ const page = () => {
           <ScrollShadow hideScrollBar className={`${roboto.className} dbcf w-[45vw] h-[50vh] relative `}>
               {allPosts.map((post, index) => (
                 <>
-                  <Detailbar key={post._id} arrival={post.arrival} place={post.place} title={post.title} departure={post.departure} price={post.price} comment={post.comment}
-                  type={post.type} link = {post.link} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
+                  <Detailbar key={post._id} arrival={post.arrival} place={post.place} title={post.title} departure={post.deadline} price={post.price} comment={post.company}
+                  type={post.task} link = {post.link} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
                   <br />
                 </>
               ))}
@@ -173,12 +182,12 @@ const page = () => {
                   <div className="w-[35%] translate-y-[32%] translate-x-[-130%]">
 
                       <input onChange={(e) => setPlace(e.target.value)}  type='text' className="w-[80%] mb-0.5" placeholder="Place" required />
-                      <input onChange={(e) => setDeparture(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Departure" required />
+                      <input onChange={(e) => setDeadline(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Deadline" required />
                       <input onChange={(e) => setArrival(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Arrival" required />
-                      <input onChange={(e) => setType(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Type" required />
+                      <input onChange={(e) => setTask(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Task" required />
                   </div>
                   <div className="w-[35%] translate-y-[36%] ml-10 translate-x-[-50%]">
-                      <input onChange={(e) => setComment(e.target.value)} type='text' className="leading-[0.775rem] h-[57%] text-start text-pretty" placeholder="Comment" required />
+                      <input onChange={(e) => setCompany(e.target.value)} type='text' className="leading-[0.775rem] h-[57%] text-start text-pretty" placeholder="Company" required />
                   </div>
               </div>
               <div>
@@ -200,7 +209,22 @@ const page = () => {
         </div>
       </div>
       <div className="col-span-1">
-        <Sidebar sidebartitle={"UPCOMING DEADLINES"}/>
+      <div className="sidebarall font-roboto items-center">
+  <h2 className="text-center" style={{ fontSize: "2rem" }}>REMAINING TASKS</h2>
+  <div className="shadow-md w-[32vw] h-[45vh] bg-transparent border-3 border-yellow-400 rounded-l-large rounded-medium text-gray-700 hover:bg-gray-100 m-4 flex flex-wrap">
+    {filteredPosts.map((post, index) => (
+      <div key={index} className="w-1/2 flex flex-col">
+        <section className="mt-7 mb-7 mr-4 ml-7 rounded-large hover:bg-yellow-400 text-center pt-2 bg-yellow-300 h-[15vh] hover:translate-y-[-3px] transition duration-300">
+          {post.title}<br />
+          
+          Deadline: {post.arrival}<br />
+          Task: {post.company}
+        </section>
+      </div>
+    ))}
+  </div>
+</div>
+
       </div>
     </div>
   );
