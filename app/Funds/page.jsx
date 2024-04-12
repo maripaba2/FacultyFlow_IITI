@@ -40,7 +40,7 @@ const page = () => {
   const handleSubmit = async () => {
     
 
-    const response = await fetch(`/api/funds/search?query=${query}`)
+    const response = await fetch(`/api/funds`)
    
     const fundsdata = await response.json();
     // const filteredPosts = fundsdata.filter(
@@ -52,7 +52,7 @@ const page = () => {
    };
    useEffect(() => {
     handleSubmit();
-  },[allPosts]);
+  });
   
 
   const handleDelete = async (post) => {

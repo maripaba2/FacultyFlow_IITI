@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import Form from "@components/Form";
+import Form2 from "@components/Form2";
 
 const UpdatePrompt = () => {
   
   const router = useRouter();
   const searchParams = useSearchParams();
   const fundsId = searchParams.get("id");
-  const [post, setPost] = useState({ title: "", arrival: "",departure: "",place: "",price:"",comment:"",type: "" });
+  const [post, setPost] = useState({ name: "", amount:0,date:"" });
   const [submitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -21,8 +21,9 @@ const UpdatePrompt = () => {
       const data =  response.body;
 
       setPost({
-        title: data.title,
-        arrival: data.arrival,
+       name:data.name,
+       amount:data.amount,
+       date:data.date
       });
     };
 
@@ -39,17 +40,14 @@ const UpdatePrompt = () => {
       const response = await fetch(`/api/funds/${fundsId}`, {
         method: "PATCH",
         body: JSON.stringify({
-          title: post.title,
-          arrival: post.arrival,
-          departure: post.departure,
-          type: post.type,
-          place: post.place,
-          price: post.price,
+          name:post.name,
+          amount:post.amount,
+          date:post.date
         }),
       });
 
       if (response.ok) {
-       router.push("/Funds");
+       router.push("/Demo");
       }
     } catch (error) {
       console.log(error);
@@ -59,7 +57,7 @@ const UpdatePrompt = () => {
   };
 
   return (
-    <Form
+    <Form2
       type='Edit'
       post={post}
       setPost={setPost}
