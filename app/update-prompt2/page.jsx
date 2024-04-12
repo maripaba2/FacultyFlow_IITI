@@ -3,31 +3,32 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import Form from "@components/Form";
+import Form2 from "@components/Form2";
 
 const UpdatePrompt = () => {
   
   const router = useRouter();
   const searchParams = useSearchParams();
   const fundsId = searchParams.get("id");
-  const [post, setPost] = useState({ title: "", arrival: "",departure: "",place: "",price:"",comment:"",type: "" });
+  const [post, setPost] = useState({ name: "", amount:0,date:"" });
   const [submitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const getPromptDetails = async () => {
       console.log('ved');
-      const response = await fetch(`/api/inventories/${inventoriesId}`);
+      const response = await fetch(`/api/funds/${fundsId}`);
       console.log(response.body);
       const data =  response.body;
 
       setPost({
-        title: data.title,
-        arrival: data.arrival,
+       name:data.name,
+       amount:data.amount,
+       date:data.date
       });
     };
 
-    if (inventoriesId) getPromptDetails();
-  }, [inventoriesId]);
+    if (fundsId) getPromptDetails();
+  }, [fundsId]);
 
   const updatePrompt = async (e) => {
     e.preventDefault();
@@ -36,20 +37,17 @@ const UpdatePrompt = () => {
     if (!fundsId) return alert("Missing FundsId!");
 
     try {
-      const response = await fetch(`/api/inventories/${inventoriesIdsId}`, {
+      const response = await fetch(`/api/funds/${fundsId}`, {
         method: "PATCH",
         body: JSON.stringify({
-          title: post.title,
-          arrival: post.arrival,
-          departure: post.departure,
-          type: post.type,
-          place: post.place,
-          price: post.price,
+          name:post.name,
+          amount:post.amount,
+          date:post.date
         }),
       });
 
       if (response.ok) {
-       router.push("/Inventory");
+       router.push("/Demo");
       }
     } catch (error) {
       console.log(error);
@@ -59,7 +57,7 @@ const UpdatePrompt = () => {
   };
 
   return (
-    <Form
+    <Form2
       type='Edit'
       post={post}
       setPost={setPost}

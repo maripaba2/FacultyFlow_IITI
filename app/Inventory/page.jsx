@@ -36,19 +36,17 @@ const page = () => {
   const [company, setCompany] = useState("a");
   const [link, setLink] = useState("a");
   const [allPosts, setAllPosts] = useState([]);
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState('');
 
   const handleSubmit = async () => {
-    
-
+    const mid = await session?.user.id;
     const response = await fetch(`/api/inventories/search?query=${query}`)
-   
     const fundsdata = await response.json();
-    // const filteredPosts = fundsdata.filter(
-    //   (item) => item.creator._id === session?.user?.id
-    // );
+    const filteredPosts = fundsdata.filter(
+      (item) => item.creator._id === mid
+    );
     
-    setAllPosts(fundsdata);
+    setAllPosts(filteredPosts);
     
    };
    useEffect(() => {
@@ -76,9 +74,9 @@ const page = () => {
   };
 
   const createPrompt = async (e) => {
-    e.preventDefault();
-
     const mid = await session?.user.id;
+    console.log(mid);
+    console.log("rohorhoh");
 
     try {
       const response = await fetch("/api/inventories/new", {
@@ -93,7 +91,7 @@ const page = () => {
           company: company,
           link:link,
           task: task,
-         
+          userId: mid,
         }),
       });
 
@@ -174,7 +172,7 @@ const page = () => {
       {/* ADD-DETAILBAR */}
 
 
-      <form>       
+      <form onSubmit={() => { createPrompt(); }} >       
         <div className="shadow-md w-[45vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100">
           <div className="w-[93%] bg-transparent border-2 border-peela rounded-l-large flex">
               <input type='text' className="text-xl font-bold ml-7 mt-1.5 h-[1.5rem] w-[80%]"onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />

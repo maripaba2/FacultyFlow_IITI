@@ -26,7 +26,7 @@ const InventorySchema = new Schema({
     required: [true, 'Deadline is required!']
  },
  price:{
-    type:String,
+    type:Number,
     required: [true, 'Price is required!']
  },
  task:{

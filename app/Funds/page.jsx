@@ -92,6 +92,8 @@ const page = () => {
     e.preventDefault();
 
     const mid = await session?.user.id;
+    console.log(mid);
+    console.log("HEHEHEHE");
 
     try {
       const response = await fetch("/api/funds/new", {
