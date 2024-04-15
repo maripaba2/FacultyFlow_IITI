@@ -20,12 +20,12 @@ const page = () => {
   const handleSelectChange = async(event) => {
     const value = await event.target.value;
     setSelectedDepartment(value);
-    console.log(selectedDepartment);
+    
   };
   const handleSelectChange2 = async(event) => {
     const value = await event.target.value;
     setSelectedDepartment2(value);
-    console.log(selectedDepartment2);
+   
   };
   const handleSubmit = async () => {
     
@@ -45,7 +45,7 @@ const page = () => {
     // );
     
     setAllEntry(entrydata);
-    console.log(allEntry);
+   
     
    };
    useEffect(() => {
@@ -53,9 +53,9 @@ const page = () => {
   });
   
 
-  const createPrompt = async () => {
+  const createPrompt = async (e) => {
+    e.preventDefault();
     
-
     const mid = await session?.user.id;
 
     try {
@@ -82,20 +82,21 @@ const page = () => {
     //     }),
     //   });
 
-      if (response.ok) {
+      // if (response.ok) {
        
-        router.push("/Funds");
-      }
-      console.log("hi");
+      //   router.push("/Funds");
+      // }
+      console.log('please');
     } catch (error) {
       console.log(error);
     }
   };
-  const createPrompt2 = async () => {
+  const createPrompt2 = async (e) => {
     
-
+    e.preventDefault();
+    
     const mid = await session?.user.id;
-
+    console.log('call');
     try {
       const response = await fetch("/api/funds/new2", {
         method: "POST",
@@ -121,10 +122,7 @@ const page = () => {
     //     }),
     //   });
 
-      if (response.ok) {
-       
-        router.push("/Funds");
-      }
+      
       console.log("hi");
     } catch (error) {
       console.log(error);
@@ -194,9 +192,9 @@ const page = () => {
     <form  >
             <input className="text-black border-2 border-black rounded-full px-3 py-2" type="text" placeholder="Department " onChange={(e) => setDep(e.target.value)} />
             <input className="text-black border-2 border-black rounded-full px-3 py-2" type="text" placeholder="Total "  onChange={(e) => setTot(e.target.value)} />
-            <button onClick={()=>{createPrompt();}}>Rishiiiiiiiiiii </button>
+            <button onClick={(e)=>{createPrompt(e);}}>Add Department </button>
         </form>
-        <select value={selectedDepartment} onChange={handleSelectChange}>
+        <select value={selectedDepartment} onChange={handleSelectChange} className="mt-10">
       <option value="">Select a department</option>
       {allPosts.map((post, index) => (
         <option key={index} value={post.department}>
@@ -208,9 +206,9 @@ const page = () => {
             <input className="text-black border-2 border-black rounded-full px-3 py-2" type="text" placeholder="Name " onChange={(e) => setName(e.target.value)} />
             <input className="text-black border-2 border-black rounded-full px-3 py-2" type="text" placeholder="Amount "  onChange={(e) => setAmount(e.target.value)} />
             <input className="text-black border-2 border-black rounded-full px-3 py-2" type="text" placeholder="Date "  onChange={(e) => setDate(e.target.value)} />
-            <button onClick={()=>{createPrompt2();}}>Submit </button>
+            <button onClick={(e)=>{createPrompt2(e);}}>Add Funds </button>
         </form>
-        <select value={selectedDepartment2} onChange={handleSelectChange2}>
+        <select value={selectedDepartment2} onChange={handleSelectChange2} className="mt-10"> 
       <option value="">Select a department</option>
       {allPosts.map((post, index) => (
         <option key={index} value={post.department}>
