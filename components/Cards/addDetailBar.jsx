@@ -21,7 +21,7 @@ function printit(){
 export default function RootLayout({ children }) {
   return (
     <form>       
-        <div className="shadow-md w-[45vw] h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100">
+        <div className="w-[100vw] shadow-md sm:w-[45vw] sm:h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100">
           <div className="w-[93%] bg-transparent border-2 border-peela rounded-l-large flex">
               <input type='text' className="text-xl font-bold ml-7 mt-1.5 h-[1.5rem] w-[80%]"onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
               <div className="flex text-[0.65rem] justify-space-around mt-1 translate-x-[-20%]">

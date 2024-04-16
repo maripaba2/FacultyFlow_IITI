@@ -97,7 +97,7 @@ export default function RootLayout({ children }) {
       </section>
     </>
     }
-    <div className=" flex flex-row" style={{position:"relative",bottom:"-5vw"}}>
+    <div className="flex justify-center items-center flex-wrap mt-8 w-[130%]">
     <div data-toggle="modal" data-target="#exampleModalLong">
       <Link href = "/Travel">
         <Card
