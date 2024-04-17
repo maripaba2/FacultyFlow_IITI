@@ -181,21 +181,19 @@ const page = () => {
       <form>
         <div className=" items-center justify-center flex flex-col sm:flex-row">
           <input
-            className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
+            className="h-[13vw] w-[50vw] sm:w-[17vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2  focus:outline-none focus:border-blue-500 mt-[2vw]"
             type="text"
             placeholder="Department"
             onChange={(e) => setDep(e.target.value)}
           />
           <input
-            className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 sm:mt-[2vw]"
+            className="h-[13vw] w-[50vw] sm:w-[17vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2  focus:outline-none focus:border-blue-500 sm:mt-[2vw]"
             type="text"
             placeholder="Total"
             onChange={(e) => setTot(e.target.value)}
           />
-        </div>
-        <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center mt-5">
           <button
-            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[5vw]"
+            className="h-[15vw] w-[30vw] sm:mb-[0vw] sm:mt:[20vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[5vw] m-[3vw]"
             onClick={(e) => {
               createPrompt(e);
             }}
@@ -221,19 +219,19 @@ const page = () => {
       <form>
         <div className=" items-center justify-center flex flex-col sm:flex-row">
           <input
-            className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
+            className="h-[13vw] w-[50vw] sm:w-[17vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2  focus:outline-none focus:border-blue-500 mt-[2vw]"
             type="text"
             placeholder="Name "
             onChange={(e) => setName(e.target.value)}
           />
           <input
-            className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
+            className="h-[13vw] w-[50vw] sm:w-[17vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2  focus:outline-none focus:border-blue-500 mt-[2vw]"
             type="text"
             placeholder="Amount "
             onChange={(e) => setAmount(e.target.value)}
           />
           <input
-            className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
+            className="h-[13vw] w-[50vw] sm:w-[17vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2  focus:outline-none focus:border-blue-500 mt-[2vw]"
             type="text"
             placeholder="Date "
             onChange={(e) => setDate(e.target.value)}
@@ -241,7 +239,7 @@ const page = () => {
         </div>
         <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center">
           <button
-            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw]"
+            className="h-[15vw] w-[30vw] sm:mb-[0vw] sm:mt:[20vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw]"
             onClick={(e) => {
               createPrompt2(e);
             }}
@@ -254,7 +252,7 @@ const page = () => {
         <select
           value={selectedDepartment2}
           onChange={handleSelectChange2}
-          className="w-45 h-15 mt-2 mb-5 block sm:w-35 py-1 px-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+          className="w-45 h-15 mt-3 mb-2 block sm:w-35 py-1 px-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
         >
           <option value="" disabled hidden>
             Select a department
