@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 
-const InventorySchema = new Schema({
+const InventSchema = new Schema({
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -36,6 +36,6 @@ const InventorySchema = new Schema({
   
 });
 
-const Inventory = models.Inventory || model("Inventory", InventorySchema);
+const Invent = models.Invent || model("Invent", InventSchema);
 
-export default Inventory;
+export default Invent;

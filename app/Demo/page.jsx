@@ -30,17 +30,17 @@ const page = () => {
     const response2 = await fetch(`/api/funds/get_entry`);
 
     const fundsdata = await response.json();
-    // const filteredPosts = fundsdata.filter(
-    //   (item) => item.creator._id === session?.user?.id
-    // );
+    const filteredPosts = fundsdata.filter(
+      (item) => item.creator._id === session?.user?.id
+    );
 
-    setAllPosts(fundsdata);
+    setAllPosts(filteredPosts);
     const entrydata = await response2.json();
-    // const filteredPosts = fundsdata.filter(
-    //   (item) => item.creator._id === session?.user?.id
-    // );
+    const filteredEntries = entrydata.filter(
+      (item) => item.creator._id === session?.user?.id
+    );
 
-    setAllEntry(entrydata);
+    setAllEntry(filteredEntries);
   };
   useEffect(() => {
     handleSubmit();
@@ -173,7 +173,7 @@ const page = () => {
     }
   };
   const handleEdit = (post) => {
-    router.push(`/update-prompt?id=${post._id}`);
+    router.push(`/update-prompt2?id=${post._id}`);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Inventory from "@models/inventory";
+import Invent from "@models/invent";
 import { connectToDB } from "@utils/database";
 
 
@@ -9,7 +9,7 @@ export async function GET(request) {
     try {
         await connectToDB()
 
-        const funds = await Inventory.find({}).populate('creator')
+        const funds = await Invent.find({}).populate('creator')
         const { searchParams } = new URL(request.url);
     // console.log(searchParams.get('query'))
     const query = searchParams.get('query');

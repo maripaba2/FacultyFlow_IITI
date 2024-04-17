@@ -9,11 +9,11 @@ const UpdatePrompt = () => {
   
   const router = useRouter();
   const searchParams = useSearchParams();
-  const fundsId = searchParams.get("id");
-  const [post, setPost] = useState({ title: "", arrival: "",departure: "",place: "",price:"",comment:"",type: "" });
+  const inventoriesId = searchParams.get("id");
+  const [post, setPost] = useState({ title: "", deadline: "",place: "",price:"",type: "" });
   const [submitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
+ 
     const getPromptDetails = async () => {
       console.log('ved');
       const response = await fetch(`/api/inventories/${inventoriesId}`);
@@ -22,26 +22,25 @@ const UpdatePrompt = () => {
 
       setPost({
         title: data.title,
-        arrival: data.arrival,
+       
       });
-    };
+    }
 
-    if (inventoriesId) getPromptDetails();
-  }, [inventoriesId]);
+    useEffect(()=>{getPromptDetails();}, [inventoriesId]);
 
   const updatePrompt = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!fundsId) return alert("Missing FundsId!");
+    if (!inventoriesId) return alert("Missing FundsId!");
 
     try {
-      const response = await fetch(`/api/inventories/${inventoriesIdsId}`, {
+      const response = await fetch(`/api/inventories/${inventoriesId}`, {
         method: "PATCH",
         body: JSON.stringify({
           title: post.title,
-          arrival: post.arrival,
-          departure: post.departure,
+         
+          deadline: post.deadline,
           type: post.type,
           place: post.place,
           price: post.price,

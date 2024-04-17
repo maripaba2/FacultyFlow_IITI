@@ -27,14 +27,13 @@ const page = () => {
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const [title, setTitle] = useState("a");
-  const [arrival, setArrival] = useState("a");
+  
   const [deadline, setDeadline] = useState("a");
-  const [department, setDepartment] = useState("a");
+  
   const [price, setPrice] = useState(0);
-  const [task, setTask] = useState("a");
+  const [type, setType] = useState("a");
   const [place, setPlace] = useState("a");
-  const [company, setCompany] = useState("a");
-  const [link, setLink] = useState("a");
+  
   const [allPosts, setAllPosts] = useState([]);
   const [query, setQuery] = useState('');
 
@@ -74,6 +73,8 @@ const page = () => {
   };
 
   const createPrompt = async (e) => {
+    e.preventDefault();
+    console.log('hurray');
     const mid = await session?.user.id;
     console.log(mid);
     console.log("rohorhoh");
@@ -84,13 +85,10 @@ const page = () => {
         body: JSON.stringify({
           title:title,
           place:place ,
-          arrival:arrival,
-          department:department,
+          
           deadline:deadline,
           price:price,
-          company: company,
-          link:link,
-          task: task,
+          type: type,
           userId: mid,
         }),
       });
@@ -110,13 +108,11 @@ const page = () => {
         body: JSON.stringify({
           title:title,
           place:place ,
-          arrival:arrival,
-          department:department,
+         
           deadline:deadline,
           price:price,
-          company: company,
-          link:link,
-          task: task,
+          
+          type: type,
           
         }),
       });
@@ -136,8 +132,8 @@ const page = () => {
   };
   const currentDate = new Date();
   const filteredPosts = allPosts
-  .filter(post => new Date(post.arrival) >= currentDate) // Filter posts with arrival dates after or equal to currentDate
-  .sort((a, b) => new Date(a.arrival) - new Date(b.arrival)) // Sort posts by ascending order of arrival dates
+  .filter(post => new Date(post.deadline) >= currentDate) // Filter posts with arrival dates after or equal to currentDate
+  .sort((a, b) => new Date(a.deadline) - new Date(b.deadline)) // Sort posts by ascending order of arrival dates
   .slice(0, 4);
 
   return (
@@ -180,13 +176,11 @@ const page = () => {
                   <div className="w-[35%] translate-y-[32%] translate-x-[-30%] sm:translate-x-[-150%] sm:translate-y-[16%]">
 
                       <input onChange={(e) => setPlace(e.target.value)}  type='text' className="w-[80%] mb-0.5" placeholder="Place" required />
-                      <input onChange={(e) => setDeparture(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Departure" required />
-                      <input onChange={(e) => setArrival(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Arrival" required />
+                      <input onChange={(e) => setDeadline(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Deadline" required />
+                     
                       <input onChange={(e) => setType(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Type" required />
                   </div>
-                  <div className="w-[35%] translate-y-[36%] ml-10 translate-x-[-50%]">
-                      <input onChange={(e) => setComment(e.target.value)} type='text' className="leading-[0.775rem] h-[57%] text-start text-pretty" placeholder="Comment" required />
-                  </div>
+                  
               </div>
               <div>
                 <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input onChange={(e) => setPrice(e.target.value)} className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
@@ -197,7 +191,7 @@ const page = () => {
                 </div>
               </div>       
           </div>
-          <button  onClick={createPrompt} className="flex justify-between bg-peela duration-250 w-[7%] h-[100%] hover:bg-amber-400 hover:duration-100 rounded-r-large border-2 border-amber-600">
+          <button  onClick={(e)=>{createPrompt(e);}} className="flex justify-between bg-peela duration-250 w-[7%] h-[100%] hover:bg-amber-400 hover:duration-100 rounded-r-large border-2 border-amber-600">
           <img alt='logo' src="/assets/images/Plus.png" className="m-auto object-contain w-[60%]"/>
           </button>
         </div>
@@ -216,8 +210,8 @@ const page = () => {
         <section className="mt-7 mb-7 mr-4 ml-7 rounded-large hover:bg-yellow-400 text-center pt-2 bg-yellow-300 h-[15vh] hover:translate-y-[-3px] transition duration-300">
           {post.title}<br />
           
-          Deadline: {post.arrival}<br />
-          Task: {post.company}
+          Deadline: {post.deadline}<br />
+          Task: {post.type}
         </section>
       </div>
     ))}

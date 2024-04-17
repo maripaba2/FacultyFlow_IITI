@@ -15,16 +15,14 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
                       <h4 className="-mb-0.5 text-nowrap"><span>Type</span><span>: </span><span>Type</span></h4> */}
                       <input  value={post.place}
             onChange={(e) => setPost({ ...post, place: e.target.value })} type='text' className="w-[80%] mb-0.5" placeholder="Place" required />
-                      <input  value={post.departure}
-            onChange={(e) => setPost({ ...post, departure: e.target.value })} type='text' className="w-[80%] mb-0.5" placeholder="Departure" required />
-                      <input  value={post.arrival}
-            onChange={(e) => setPost({ ...post, arrival: e.target.value })} type='text' className="w-[80%] mb-0.5" placeholder="Arrival" required />
+                      <input  value={post.deadline}
+            onChange={(e) => setPost({ ...post, deadline: e.target.value })} type='text' className="w-[80%] mb-0.5" placeholder="Deadline" required />
+                      
                       <input  value={post.type}
             onChange={(e) => setPost({ ...post, type: e.target.value })} type='text' className="w-[80%] mb-0.5" placeholder="Type" required />
                   </div>
                   <div className="w-[35%] translate-y-[36%] ml-10 translate-x-[-50%]">
-                      <input  value={post.comment}
-            onChange={(e) => setPost({ ...post, comment: e.target.value })} type='text' className="leading-[0.775rem] h-[57%] text-start text-pretty" placeholder="Comment" required />
+                     
                   </div>
               </div>
               <div>
