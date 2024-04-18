@@ -136,6 +136,8 @@ const page = () => {
   .sort((a, b) => new Date(a.deadline) - new Date(b.deadline)) // Sort posts by ascending order of arrival dates
   .slice(0, 4);
 
+  console.log(allPosts);
+
   return (
 <div className="sm:grid sm:grid-cols-3 md:gap-4 flex flex-col-reverse">
       <div className="col-span-2">
@@ -149,7 +151,7 @@ const page = () => {
               {allPosts.map((post, index) => (
                 <>
                   <Detailbar key={post._id} arrival={post.arrival} place={post.place} title={post.title} deadline={post.deadline} price={post.price} comment={post.company}
-                  type={post.task} link = {post.link} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
+                  type={post.task} link = {post.link} id = {post._id} email = {session?.user.email} userid = {session?.user.email} w = "inventory" handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
                   <br />
                 </>
               ))}
@@ -160,7 +162,7 @@ const page = () => {
 
 
       <form onSubmit={() => { createPrompt(); }} >       
-      <div className="  w-[100%] h-[50vw] text-xl shadow-md sm:w-[45vw] sm:h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100">
+      <div className="w-[100%] h-[50vw] text-xl shadow-md sm:w-[45vw] sm:h-[18vh] bg-off-white flex rounded-medium text-gray-700 hover:bg-gray-100">
           <div className="w-[93%] bg-transparent border-2 border-peela rounded-l-large flex">
               <input type='text' className="text-xl font-bold ml-7 mt-1.5 h-[1.5rem] w-[80%]"onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
               <div className="flex text-[0.65rem] justify-space-around mt-1 translate-x-[-20%]">
@@ -174,7 +176,7 @@ const page = () => {
                   
               </div>
               <div>
-                <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input onChange={(e) => setPrice(e.target.value)} className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
+                <h1 className="text-xl font-bold mt-1.5 translate-x-4">₹ <input onChange={(e) => setPrice(e.target.value)} className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
 
                 <div class="flex-col mt-[4vw] sm: flex sm:flex-row  sm:w-[30%] sm:translate-x-[-190%] sm:mt-[6.5vh]">
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250">View</button>

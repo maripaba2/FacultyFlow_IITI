@@ -24,15 +24,12 @@ const InventSchema = new Schema({
  },
  type:{
     type:String,
-    required: [true, 'Price is required!']
+    required: [true, 'Type is required!']
  },
  
-
-
-
-
-
-
+ link: {
+   type: String,
+ }
   
 });
 

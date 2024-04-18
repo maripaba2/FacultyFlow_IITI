@@ -2,9 +2,24 @@ const { google } = require('googleapis');
 import { NextResponse } from "next/server";
 const fs = require('fs');
 const apikeys = require('../../apikey.json');
+import Invent from "@models/invent";
+import Travel from "@models/travel";
+import { connectToDB } from "@utils/database";
+
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
 
 var name;
 var path;
+var id;
+var userid;
+var email;
+var from;
+
+const fold = {
+    "inventory": "1ZDa2mwGVZJSnQIcgXpHMX9hKuDrn8PoN",
+    "travel": "1zBhPqpXRNhRacKvlrCLffW1iZRE2QJS9"        
+}
 
 const SCOPE = ["https://www.googleapis.com/auth/drive"]
 async function auth(){
@@ -26,7 +41,7 @@ async function upload(authClient){
 
         var fileMetaData = {
             name: name,
-            parents: ["1lYwasSRIiFDrvKufXaFxOuDosvl3U8Xi"],
+            parents: [fold[from]],
         }
 
         drive.files.create({
@@ -44,24 +59,67 @@ async function upload(authClient){
     })
 }
 
-function getName(head){
-    let prev = "";
-    let name = "";
-
-    head.forEach(head => {
-        if(head.length > 6 && head.slice(0,4) == "http"){
-            name = prev;
-            return prev;
+function getName(head) {
+    for(const [key, value] of head[Symbol.iterator]()){
+        if(key == "name") {
+            return value;
         }
-            
-        prev = head;
-    });
+    }
 
-    return name;
-};
+    return null;
+}
 
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
+function getId(head) {
+    for(const [key, value] of head[Symbol.iterator]()){
+        if(key == "id") {
+            return value;
+        }
+    }
+
+    return null;
+}
+
+function getUserId(head) {
+    for(const [key, value] of head[Symbol.iterator]()){
+        if(key == "userid") {
+            return value;
+        }
+    }
+
+    return null;
+}
+
+function getEmail(head) {
+    for(const [key, value] of head[Symbol.iterator]()){
+        if(key == "email") {
+            return value;
+        }
+    }
+
+    return null;
+}
+
+function getFrom(head) {
+    for(const [key, value] of head[Symbol.iterator]()){
+        if(key == "from") {
+            return value;
+        }
+    }
+
+    return null;
+}
+
+async function setLinkInvent(value){
+    await connectToDB();
+    const invent = await Invent.findOneAndUpdate({_id: id}, { link: value });
+    console.log(invent);
+}
+
+async function setLinkTravel(value){
+    await connectToDB();
+    const travel = await Travel.findOneAndUpdate({_id: id}, { link: value });
+    console.log(travel);
+}
 
 export async function POST(request) { 
   const blob = await request.blob();
@@ -70,9 +128,15 @@ export async function POST(request) {
 
   const head = request.headers;
   console.log(head);
+
   name = getName(head);
+  id = getId(head);
+  userid = getUserId(head);
+  email = getEmail(head);
+  from = getFrom(head);
 
   path = join(process.cwd() + '/drive_server', name);
+  console.log(path);
 
   try {
     await writeFile(path, uint8Array);
@@ -80,7 +144,14 @@ export async function POST(request) {
 
     const oth = await auth();
     const data = await upload(oth);
-    console.log(data['data']['id']);
+    const value = data['data']['id'];
+
+    if(from == "inventory"){
+        await setLinkInvent(value);
+    }
+    if(from == "travel"){
+        await setLinkTravel(value);
+    }
 
   } catch (error) {
     console.error('Error saving file:', error);
