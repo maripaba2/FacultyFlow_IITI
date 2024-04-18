@@ -3,6 +3,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const page = () => {
   const router = useRouter();
   const [dep, setDep] = useState("");
@@ -10,13 +12,14 @@ const page = () => {
   const [tot, setTot] = useState("");
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(0);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
   const { data: session } = useSession();
   const [allPosts, setAllPosts] = useState([]);
   const [allEntry, setAllEntry] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedDepartment2, setSelectedDepartment2] = useState("");
-
+  const [departmentBalances, setDepartmentBalances] = useState({});
+  
   const handleSelectChange = async (event) => {
     const value = await event.target.value;
     setSelectedDepartment(value);
@@ -44,7 +47,37 @@ const page = () => {
   };
   useEffect(() => {
     handleSubmit();
-  });
+    const balances = {};
+  
+    allPosts.forEach((post) => {
+      const price = parseFloat(post.price);
+      
+      if (!isNaN(price)) {
+        if (!balances[post.department]) {
+          balances[post.department] = price;
+        } else {
+          balances[post.department] += price;
+        }
+      } else {
+        console.log(`Invalid price for post ${post._id}: ${post.price}`);
+      }
+    });
+
+    allEntry.forEach((post) => {
+      const amount = parseFloat(post.amount);
+      if (!isNaN(amount)) {
+        if (!balances[post.department]) {
+          balances[post.department] = -amount;
+        } else {
+          balances[post.department] -= amount;
+        }
+      } else {
+        console.log(`Invalid amount for post ${post._id}: ${post.amount}`);
+      }
+    });
+  
+    setDepartmentBalances(balances);
+  }, [allPosts]);
 
   const createPrompt = async (e) => {
     e.preventDefault();
@@ -82,7 +115,7 @@ const page = () => {
         body: JSON.stringify({
           name: name,
           amount: amount,
-          date: date,
+          date: date+1,
           userId: mid,
           department: selectedDepartment,
         }),
@@ -162,9 +195,28 @@ const page = () => {
   const handleEdit = (post) => {
     router.push(`/update-prompt2?id=${post._id}`);
   };
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  }
 
   return (
     <div className="flex flex-col align-center justify-center">
+      <div className="flex flex-col align-center justify-center">
+      {/* Your form and other JSX here */}
+      {/* Display department balances */}
+      <div>
+        <h2>Department Balances:</h2>
+        <ul>
+          {Object.entries(departmentBalances).map(([department, balance]) => (
+            <li key={department}>
+              {department}: &#x20b9;{balance}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
       <form>
         <div className=" items-center justify-center flex flex-col sm:flex-row">
           <input
@@ -219,12 +271,9 @@ const page = () => {
             placeholder="Amount "
             onChange={(e) => setAmount(e.target.value)}
           />
-          <input
-            className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
-            type="text"
-            placeholder="Date "
-            onChange={(e) => setDate(e.target.value)}
-          />
+          
+            <DatePicker selected={date} onChange={(date) => setDate(date)} />
+          
         </div>
         <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center">
           <button
@@ -279,14 +328,7 @@ const page = () => {
                     // <h1>{post.name}</h1>
                     <tr class="hover:bg-gray-50">
                       <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                        <div class="relative h-10 w-10">
-                          <img
-                            class="h-full w-full rounded-full object-cover object-center"
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt=""
-                          />
-                          <span class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
-                        </div>
+                       
                         <div class="text-sm">
                           <div class="font-medium text-gray-700">
                             {post.name}
@@ -304,7 +346,7 @@ const page = () => {
                         <div class="flex gap-2">
                           <span class="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-600">
                             {" "}
-                            {post.date}
+                            {formatDate(post.date)}
                           </span>
                         </div>
                       </td>

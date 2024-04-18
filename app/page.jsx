@@ -101,7 +101,7 @@ export default function RootLayout({ children }) {
     <div data-toggle="modal" data-target="#exampleModalLong">
       <Link href = "/Travel">
         <Card
-          title="Travel"
+          title="Leaves"
           subtitle="Subtitle 1"
           description="Description 1"
           imageUrl="/images/card1.jpg"
@@ -138,7 +138,7 @@ export default function RootLayout({ children }) {
       <div  data-toggle="modal" data-target="#exampleModalLong">
         <Link href = "/Documents">
           <Card
-            title="Documents"
+            title="Logs"
             subtitle="Subtitle 2"
             description="Description 2"
             imageUrl="/images/card2.jpg"

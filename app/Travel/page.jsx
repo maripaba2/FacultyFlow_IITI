@@ -40,7 +40,7 @@ const page = () => {
   const handleSubmit = async () => {
     
 
-    const response = await fetch(`/api/funds/search?query=${query}`)
+    const response = await fetch(`/api/travels/search?query=${query}`)
    
     const fundsdata = await response.json();
     // const filteredPosts = fundsdata.filter(
@@ -60,7 +60,7 @@ const page = () => {
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/funds/${post._id.toString()}`, {
+        await fetch(`/api/travels/${post._id.toString()}`, {
           method: "DELETE",
         });
 
@@ -78,25 +78,25 @@ const page = () => {
     e.preventDefault();
 
     const mid = await session?.user.id;
+    const email = await session?.user.email;
 
     try {
-      const response = await fetch("/api/funds/new", {
+      const response = await fetch("/api/travels/new", {
         method: "POST",
         body: JSON.stringify({
           title: title,
           place: place,
           arrival: arrival,
           departure: departure,
-          price: price,
-          comment: comment,
-          link: link,
+         
           type: type,
           userId: mid,
+          email:email
         }),
       });
 
       if (response.ok) {
-        router.push("/Funds");
+        router.push("/Travel");
       }
       console.log("hi");
     } catch (error) {
@@ -105,22 +105,20 @@ const page = () => {
   };
   const updatePrompt = async (post) => {
     try {
-      const response = await fetch(`/api/funds/${post._id.toString()}`, {
+      const response = await fetch(`/api/travels/${post._id.toString()}`, {
         method: "PATCH",
         body: JSON.stringify({
           title:title,
           place:place ,
           arrival:arrival,
           departure: departure,
-          price:price,
-          comment: comment,
-          link:link,
+          
           type: type,
         }),
       });
 
       if (response.ok) {
-        router.push("/Funds");
+        router.push("/Travel");
       }
     } catch (error) {
       console.log(error);
@@ -130,7 +128,7 @@ const page = () => {
     }
   };
   const handleEdit = (post) => {
-    router.push(`/update-prompt?id=${post._id}`);
+    router.push(`/update?id=${post._id}`);
   };
 
   return (
@@ -154,8 +152,8 @@ const page = () => {
           <ScrollShadow hideScrollBar className={`${roboto.className} dbcf w-[45vw] h-[50vh] relative `}>
               {allPosts.map((post, index) => (
                 <>
-                  <Detailbar key={post._id} arrival={post.arrival} place={post.place} title={post.title} departure={post.departure} price={post.price} comment={post.comment}
-                  type={post.type} link = {post.link} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
+                  <Detailbar key={post._id} arrival={post.arrival} place={post.place} title={post.title} departure={post.departure} 
+                  type={post.type}  handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
                   <br />
                 </>
               ))}
@@ -172,17 +170,17 @@ const page = () => {
               <div className="flex text-[0.65rem] justify-space-around mt-1 translate-x-[-20%]">
                   <div className="w-[35%] translate-y-[32%] translate-x-[-30%] sm:translate-x-[-150%] sm:translate-y-[16%]">
 
-                      <input onChange={(e) => setPlace(e.target.value)}  type='text' className="w-[80%] mb-0.5" placeholder="Place" required />
-                      <input onChange={(e) => setDeparture(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Departure" required />
-                      <input onChange={(e) => setArrival(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Arrival" required />
+                     
+                      <input onChange={(e) => setDeparture(e.target.value)} type='text' className="w-[180%] mb-0.5" placeholder="Departure(yyyy/mm/dd)" required />
+                      <input onChange={(e) => setArrival(e.target.value)} type='text' className="w-[180%] mb-0.5" placeholder="Arrival(yyyy/mm/dd)" required />
                       <input onChange={(e) => setType(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Type" required />
                   </div>
                   <div className="w-[35%] translate-y-[36%] ml-10 translate-x-[-50%]">
-                      <input onChange={(e) => setComment(e.target.value)} type='text' className="leading-[0.775rem] h-[57%] text-start text-pretty" placeholder="Comment" required />
+                     
                   </div>
               </div>
               <div>
-                <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input onChange={(e) => setPrice(e.target.value)} className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
+                <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input onChange={(e) => setPlace(e.target.value)} className="w-[50%] h-[1.5rem]" type='text' placeholder="Location" /></h1>
 
                 <div class="flex-col mt-[4vw] sm: flex sm:flex-row  sm:w-[30%] sm:translate-x-[-190%] sm:mt-[6.5vh]">
                   <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250">View</button>
@@ -200,9 +198,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="col-span-1">
-        <Sidebar sidebartitle={"TRAVEL LIST"}/>
-      </div>
+      
     </div>
   );
 };

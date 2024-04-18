@@ -149,7 +149,7 @@ const page = () => {
               {allPosts.map((post, index) => (
                 <>
                   <Detailbar key={post._id} arrival={post.arrival} place={post.place} title={post.title} deadline={post.deadline} price={post.price} comment={post.company}
-                  type={post.task} link = {post.link} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
+                  type={post.type} link = {post.link} handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
                   <br />
                 </>
               ))}
@@ -167,7 +167,7 @@ const page = () => {
                   <div className="w-[35%] translate-y-[32%] translate-x-[-30%] sm:translate-x-[-150%] sm:translate-y-[16%]">
 
                       <input onChange={(e) => setPlace(e.target.value)}  type='text' className="w-[80%] mb-0.5" placeholder="Place" required />
-                      <input onChange={(e) => setDeadline(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Deadline" required />
+                      <input onChange={(e) => setDeadline(e.target.value)} type='text' className="w-[180%] mb-0.5" placeholder="Deadline(yyyy/mm/dd)" required />
                      
                       <input onChange={(e) => setType(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Type" required />
                   </div>
@@ -202,7 +202,7 @@ const page = () => {
           {post.title}<br />
           
           Deadline: {post.deadline}<br />
-          Task: {post.type}
+         
         </section>
       </div>
     ))}
