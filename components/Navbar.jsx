@@ -76,14 +76,14 @@ const Navbar = () => {
         {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
             <Link href='/CalLog' className='black_btn'>
-              Calender and Logs
+              Calender
             </Link>
 
             <button type='button' onClick={signOut} className='outline_btn'>
               Sign Out
             </button>
 
-            <Link href='/profile'>
+            <Link href='/'>
               <Image
                 src={session?.user.image}
                 width={37}
@@ -128,18 +128,11 @@ const Navbar = () => {
             {toggleDropdown && (
               <div className='dropdown'>
                 <Link
-                  href='/profile'
+                  href='/CalLog'
                   className='dropdown_link'
                   onClick={() => setToggleDropdown(false)}
                 >
-                  My Profile
-                </Link>
-                <Link
-                  href='/create-prompt'
-                  className='dropdown_link'
-                  onClick={() => setToggleDropdown(false)}
-                >
-                  Create Prompt
+                  Calender
                 </Link>
                 <button
                   type='button'
