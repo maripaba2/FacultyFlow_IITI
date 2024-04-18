@@ -62,23 +62,10 @@ const page = () => {
         }),
       });
 
-      //   const entry="Added";
-      //   const response2 = await fetch("/api/logs/new", {
-      //     method: "POST",
-      //     body: JSON.stringify({
-      //       userId: mid,
-      //       title: title,
-      //       type: type,
-      //       entry : entry,
-      //       price: price,
-      //       date : new Date().toDateString()
-      //     }),
-      //   });
+      if (response.ok) {
 
-      // if (response.ok) {
-
-      //   router.push("/Funds");
-      // }
+        router.push("/Demo");
+      }
       console.log("please");
     } catch (error) {
       console.log(error);
@@ -101,18 +88,18 @@ const page = () => {
         }),
       });
 
-      //   const entry="Added";
-      //   const response2 = await fetch("/api/logs/new", {
-      //     method: "POST",
-      //     body: JSON.stringify({
-      //       userId: mid,
-      //       title: title,
-      //       type: type,
-      //       entry : entry,
-      //       price: price,
-      //       date : new Date().toDateString()
-      //     }),
-      //   });
+        const entry="Added";
+        const response2 = await fetch("/api/logs/new", {
+          method: "POST",
+          body: JSON.stringify({
+            userId: mid,
+            title: name,
+            type: selectedDepartment,
+            entry : entry,
+            price: amount,
+            date : new Date().toDateString()
+          }),
+        });
 
       console.log("hi");
     } catch (error) {
@@ -129,18 +116,18 @@ const page = () => {
           method: "DELETE",
         });
 
-        // const entry="Deleted";
-        // const response2 = await fetch("/api/logs/new", {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     userId: mid,
-        //     title: post.title,
-        //     type: post.type,
-        //     entry : entry,
-        //     price: post.price,
-        //     date :new Date().toDateString()
-        //   }),
-        // });
+        const entry="Deleted";
+        const response2 = await fetch("/api/logs/new", {
+          method: "POST",
+          body: JSON.stringify({
+            userId: mid,
+            title: post.name,
+            type: post.department,
+            entry : entry,
+            price: post.amount,
+            date :new Date().toDateString()
+          }),
+        });
 
         const filteredPosts = Funds.filter((item) => item._id !== post._id);
 
