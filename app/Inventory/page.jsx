@@ -38,11 +38,11 @@ const page = () => {
   const [query, setQuery] = useState('');
 
   const handleSubmit = async () => {
-    const mid = await session?.user.id;
+    const mid = await session?.user?.id;
     const response = await fetch(`/api/inventories/search?query=${query}`)
     const fundsdata = await response.json();
     const filteredPosts = fundsdata.filter(
-      (item) => item.creator._id === mid
+      (item) => item.creator?._id === mid
     );
     
     setAllPosts(filteredPosts);

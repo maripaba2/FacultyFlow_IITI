@@ -70,7 +70,7 @@ const page = () => {
     <div>
 
             <div>
-              <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center mt-5">
+              <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center mt-5 mb-5">
             <input
             className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 sm:mt-[2vw]"
             type="Calender link"
@@ -78,7 +78,7 @@ const page = () => {
             onChange={(e) => setLink(e.target.value)}
           />
           {!linkid && <button
-            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[5vw]"
+            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] "
             onClick={(e) => {
               createPrompt(e);
             }}
@@ -87,7 +87,7 @@ const page = () => {
           </button>}
           
           {linkid && <button
-            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[5vw]"
+            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] "
             onClick={(e) => {
               handleDelete(e);
             }}
