@@ -132,7 +132,7 @@ export async function POST(request) {
   name = getName(head);
   id = getId(head);
   userid = getUserId(head);
-  email = getEmail(head);
+//   email = getEmail(head);
   from = getFrom(head);
 
   path = join(process.cwd() + '/drive_server', name);

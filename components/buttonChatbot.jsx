@@ -8,10 +8,6 @@ import {motion} from "framer-motion";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
-
-
-  
-
 export default function RootLayout({ children }) {
     const [open, setOpen] = useState(false);
 

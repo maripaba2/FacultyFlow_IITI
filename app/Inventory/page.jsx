@@ -50,7 +50,7 @@ const page = () => {
    };
    useEffect(() => {
     handleSubmit();
-  },[allPosts]);
+  },[session]);
   
 
   const handleDelete = async (post) => {
@@ -130,6 +130,9 @@ const page = () => {
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
   };
+  const handleUpload = (post) => {
+    router.push(`/upload-prompt?id=${post._id}&from=inventory`);
+  };
   const currentDate = new Date();
   const filteredPosts = allPosts
   .filter(post => new Date(post.deadline) >= currentDate) // Filter posts with arrival dates after or equal to currentDate
@@ -151,7 +154,7 @@ const page = () => {
               {allPosts.map((post, index) => (
                 <>
                   <Detailbar key={post._id} arrival={post.arrival} place={post.place} title={post.title} deadline={post.deadline} price={post.price} comment={post.company}
-                  type={post.task} link = {post.link} id = {post._id} email = {session?.user.email} userid = {session?.user.email} w = "inventory" handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} />
+                  type={post.task} link = {post.link} id = {post._id} email = {session?.user.email} userid = {session?.user.email} w = "inventory" handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} handleUpload={() => handleUpload && handleUpload(post)} />
                   <br />
                 </>
               ))}

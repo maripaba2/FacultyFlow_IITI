@@ -7,7 +7,6 @@ import { useRef } from "react";
 
 export default function RootLayout( props ) {
   const hiddenFileInput = useRef(null);
-
   const url = "https://drive.google.com/file/d/" + props.link;
 
   return (
@@ -24,7 +23,9 @@ export default function RootLayout( props ) {
           <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250" onClick={props.handleEdit}>Edit</button>
           { props.link && <a href = {url} target="_blank"><button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button></a> }
           { !props.link && 
-              <UploadButton id = {props.id} email = {props.email} from = {props.w} userid = {props.userid} />}
+              // <UploadButton id = {props.id} email = {props.email} from = {props.w} userid = {props.userid} onClick={props.handleUpload}/>
+              <div className="inline-block rounded-md ml-2 duration-250 text-xs bg-peela text-gray-700 cursor-pointer hover:bg-amber-400" onClick={props.handleUpload}>Upload</div>
+          }
         </div>
         <h3 className="C3 text-xl font-bold mt-1.5 mr-5 text-nowrap">₹{ props.price }</h3>
       </div>
