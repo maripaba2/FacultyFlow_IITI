@@ -219,7 +219,7 @@ const page = () => {
   }
 
   return (
-    <div className="flex flex-row-reverse align-center justify-center">
+    <div className="flex flex-wrap flex-row-reverse align-center justify-center mt-8">
       <div className="flex flex-col items-center ">
         <div className="  ml-10  mt-10 flex flex-col align-center text-center justify-center bg-transparent border-3  sm:pl-3 sm:w-[20vw] border-yellow-400 rounded-l-large rounded-medium text-gray-700 w-[90%] items-center bg-yellow-200 ">
           <h2>Department Balances:</h2>
@@ -233,7 +233,7 @@ const page = () => {
         </div>
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col "style={{left:"-5rem", position:"relative"}}>
         <div className="flex flex-row ">
         <Button className=" bg-red-500 text-white" onPress={onOpen1}>Add Department</Button>
         <Modal isOpen={isOpen1} onOpenChange={onOpenChange1}>
@@ -366,7 +366,7 @@ const page = () => {
         <hr class="border border-black-300 my-6" />
 
 
-        <div class="ml-[9vw] mt-3 flex align-center justify-center rounded-lg border border-gray-200 shadow-md w-[100%] sm:ml-[1vw]">
+        <div class="ml-[9vw] mt-3 flex align-center justify-center rounded-lg border border-gray-200 shadow-md w-[100%] sm:ml-[1vw]" style={{left:"-3rem", position:"relative"}}>
           <table class=" border-collapse bg-white text-left text-sm text-gray-500 w-[100%]">
             <thead class="bg-gray-50">
               <tr>

@@ -12,12 +12,12 @@ export default function CustomCard({ title, subtitle, description, imageUrl, ico
       </CardHeader>
       <CardBody className="overflow-visible py-2" typeof="button" itemType="button">
         <i className={icon} style={{display:"flex", alignItems:'center', justifyContent:'center', fontSize:"6rem", position:'relative', top:'-1rem', color:'#cc5a0f'}}></i>
-        <Image
+        {/* <Image
           alt="Card background"
           className="object-cover rounded-xl"
           src={imageUrl}
           width={270}
-        />
+        /> */}
       </CardBody>
     </Card>
   );
