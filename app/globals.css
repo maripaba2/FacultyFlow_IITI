@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* 
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+input[type = "text"] {
+  border-radius: 1rem;
+}
+
+input:focus{
+  outline: none;
+}
+
+.desc{
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+
+
+.C4{
+  font-size: calc(min(0.65rem, 2vh));
+}
+
+.cs-main-container{
+  overflow-y: hidden !important;
+}
+.cs-message-list{
+  overflow-y: auto;
+}
+.cs-message--outgoing div div{
+  background-color: rgb(252, 218, 104) !important;
+}
+.cs-message--incoming div div{
+  background-color: rgb(233, 171, 47) !important;
+}
+.cs-message-input__content-editor-wrapper{
+  background-color: rgb(255, 246, 196);
+}
+.cs-message-input__content-editor-wrapper div{
+  background-color: rgb(255, 246, 196);
+}
+.cs-button--attachment{
+  color: white;
+  height: 0px;
+  width: 0px;
+}
+.cs-button--send{
+  color: rgb(95, 68, 14);
+}
+.cs-typing-indicator__text{
+  color: rgb(233, 171, 47) !important;
+}
+.cs-typing-indicator__dot{
+  background-color: rgb(145, 114, 53);
+}
+.ps__thumb-y{
+  background-color: rgb(145, 114, 53);
+}
+.ps__rail-y:hover > .ps__thumb-y, .ps__rail-y:focus > .ps__thumb-y, .ps__rail-y.ps--clicking .ps__thumb-y{
+  background-color: rgb(145, 114, 53);
+}
+.ps .ps__rail-x:hover, .ps .ps__rail-y:hover, .ps .ps__rail-x:focus, .ps .ps__rail-y:focus, .ps .ps__rail-x.ps--clicking, .ps .ps__rail-y.ps--clicking{
+  background-color: rgb(255, 250, 240);
+}
+
+.dbcf > .db{
+  height: 18vh;
+}
+
+.appage{
+  background-image: url('../public/assets/images/back.png');
+  background-repeat: no-repeat;
+  background-size: 80%;
+  /* background-position: (-5%, -50%); */
+  background-position: -100% 20%;
+}

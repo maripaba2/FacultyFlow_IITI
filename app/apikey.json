@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "facultyflow-iiti",
+  "private_key_id": "688a7ac7381b9b7a0ec3106730e937f765bfe5bd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDAH3Cx9F+3TLkj\nfKAKBT/q/zxjdgF9+AMUgn7q1i8LlK7pSkIYrfjxMgPq0HmrRCNrtFrezQZVMqL3\nfeKRkbhcFCrpZriVgeKYVDfVqN8R/RdCBYUHDLcYmfETQ3h8Mg2ngHvG42dylwHJ\nSm50w9JVoNatjmzS5tw6pccQSSKB5jOP9sqaeQeo5AdLu4o+aMjlVqDchW2696UB\nXjJAgDuLGV4htaOnaO8HHOSw19Tgxn8Dv2D/INa0UH5uduchG7J/4qouqOl5pFW+\niufACZD0kvs9H7gwc7rkJtOrWT2KDkDPj8IEmVR7ZuqtYsUJ/5rkcu6l7HZA2rXH\nJQ6gBuuBAgMBAAECggEABoHKGQI0L7V128wqcMxxYsMsR24av3/OkuZB6DBC6FCB\nMBOSHjCI6u+3uZSVWltKG9QVnnrb3mItqiuQUz/X5P57NEEvZUOV6h+IGJYfSrED\navqxi7s+2aLKdc2Q33FOjGrJ8RgzS7/uO+QSePqc6BuKHyy2ENqS1kWrx/3CIRty\nHW2A7Zu09tQ6ACFjNdeo1MU0B08gjlQEMAwkbliOnaMOIIiW5qcQqV0Id4Z6cHx8\nl2ynMWY3JhKw4QSWllws3N8RFdW2gbmTGZTbA6+52R73THeOWqY1wLmYLG5qG/Ug\nEhvv6xak2qPPusM1F+w+lWjuLiX3GT3VblW+4iYusQKBgQDzq/zoRvmD61Fxu0H2\nYtWHkVP7CoNh8tZGRCo22Ubuc5DdF/7SMiPJi4nLxDLQPTXyphXCe4DNb1Eqo/5w\ncp3Hrsei/IA0Rvp1SN/+3xTCePlxLoRsIQJdFY+Exf1UjklVyg+xnNL/ISPlv5t6\nbc4xlZOM4du/cKm79cjR5/CavQKBgQDJ18t6tMP+n5BpnrFl0D/KwU2jG82L+qgs\nQSTbUqhVGrk9dkZbceQTteQoRq/wupnrctsGk5v5jQ9w42fJMFhoj/09JP702Xaw\ndphtGk55RQfJji5nwUJXWxpgTuW/RF0ABf/FyD5JNb1r5KLTEnJmiqHrHjM/Olf1\nJYhiaBPCFQKBgHf+XOfBc8QL0KqSDVSYrRA6d8GrFrHYVL57eNJTwwNPs6m81EaM\nXGU2qt/GOUOksPlR4mtISFBiHfVCltynBJ29qx/O+g9EWLgC8BNhpaZyzlt3Dcz1\noGVYZbl7ilnmS6TMgVf0o07x8eyEo7rxcdWnE+cPnhgzEdK2oXMEpc59AoGBALB3\nEvXvrl8hf+9nh67815jbUZYly5nzBi7SsXdyl6r4FzWt/ysZso6s+pFf45hye/lG\nTEk+qiIOeo52splJxDF+madofeLxcPwsY20Xj74kZP+JZ/bcFrUq+C91KxYCndBU\nbl6riBEXg8kddmFVAmG2GIPnvmQsDRRNwSRP295VAoGAZ7BJdyRQUBTOy0Y7JjeU\n28jX0kTgO1Ac2JEPr70wammCYYzGYwbVN5f6yeUxPU0jj1ufDq7AUyEjTnKLAeMD\n6p+kN/YN6YrXVbP/LJ8zVm08iXH1zlgXxTZ+9NYWP/H6xf3AU6wKO5WTltqUvihe\nfRBaq5F3RSzoJT/h7N4nphw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "facultyflow-iiti@facultyflow-iiti.iam.gserviceaccount.com",
+  "client_id": "115115356981305480749",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/facultyflow-iiti%40facultyflow-iiti.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

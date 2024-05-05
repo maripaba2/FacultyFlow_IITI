@@ -1,0 +1,10 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,195;1,195&display=swap');
+
+
+.cardd {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 195;
+  font-style: normal;
+}
