@@ -48,19 +48,20 @@ const page = () => {
     setSelectedDepartment2(value);
   };
   const handleSubmit = async () => {
-    const response = await fetch(`/api/funds`);
-    const response2 = await fetch(`/api/funds/get_entry`);
+    const mid = await session?.user.id;
+    const response = await fetch(`/api/funds?creator=${mid}`);
+    const response2 = await fetch(`/api/funds/get_entry?creator=${mid}`);
 
-    const fundsdata = await response.json();
-    const filteredPosts = fundsdata.filter(
-      (item) => item.creator._id === session?.user?.id
-    );
+    const filteredPosts = await response.json();
+    // const filteredPosts = fundsdata.filter(
+    //   (item) => item.creator._id === session?.user?.id
+    // );
 
     setAllPosts(filteredPosts);
-    const entrydata = await response2.json();
-    const filteredEntries = entrydata.filter(
-      (item) => item.creator._id === session?.user?.id
-    );
+    const filteredEntries = await response2.json();
+    // const filteredEntries = entrydata.filter(
+    //   (item) => item.creator._id === session?.user?.id
+    // );
 
     setAllEntry(filteredEntries);
   };
@@ -96,7 +97,7 @@ const page = () => {
     });
 
     setDepartmentBalances(balances);
-  }, [allPosts]);
+  }, [allPosts, session]);
 
   const createPrompt = async (e) => {
     e.preventDefault();

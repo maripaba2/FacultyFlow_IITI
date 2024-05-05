@@ -142,7 +142,7 @@ const page = () => {
               {allPosts.map((post, index) => (
                 <>
                   <Detailbar key={post._id} arrival={post.arrival} place={post.place} title={post.title} deadline={post.deadline} price={post.price} comment={post.company}
-                  type={post.task} link = {post.link} id = {post._id} email = {session?.user.email} userid = {session?.user.email} w = "inventory" handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} handleUpload={() => handleUpload && handleUpload(post)} />
+                  type={post.type} link = {post.link} id = {post._id} email = {session?.user.email} userid = {session?.user.email} w = "inventory" handleDelete={() => handleDelete && handleDelete(post)} handleEdit={() => handleEdit && handleEdit(post)} handleUpload={() => handleUpload && handleUpload(post)} />
                   <br />
                 </>
               ))}
@@ -185,10 +185,11 @@ const page = () => {
       </div>
       <div className="col-span-1">
       <div className="sidebarall font-roboto items-center">
-  <h2 className="text-center" style={{ fontSize: "2rem" }}>REMAINING TASKS</h2>
-  <div className="shadow-md w-[32vw] h-[45vh] bg-transparent border-3 border-yellow-400 rounded-l-large rounded-medium text-gray-700 hover:bg-gray-100 m-4 flex flex-wrap">
+  <h2 className="text-center mt-10 ml-7" style={{ fontSize: "2rem" }}>Remaining Tasks</h2>
+  <br />
+  <div className="shadow-md w-[32vw] h-[45vh] bg-transparent border-3 border-yellow-400 rounded-l-large rounded-medium text-gray-700 hover:bg-gray-100 m-auto flex flex-wrap">
     {filteredPosts.map((post, index) => (
-      <div key={index} className="w-1/2 flex flex-col">
+      <div key={index} className="w-1/2 flex flex-col m-auto">
         <section className="mt-7 mb-7 mr-4 ml-7 rounded-large hover:bg-yellow-400 text-center pt-2 bg-yellow-300 h-[15vh] hover:translate-y-[-3px] transition duration-300">
           {post.title}<br />
           

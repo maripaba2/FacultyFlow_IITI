@@ -32,9 +32,6 @@ const page = () => {
             userId: mid,
           }),
         });
-        if(response.ok){
-          console.log("please");
-        }
       } catch (error) {
         console.log(error);
       }
@@ -53,9 +50,6 @@ const page = () => {
           });
   
           setLink("");
-          if(response.ok){
-            console.log("ho");
-          }
         } catch (error) {
           console.log(error);
         }

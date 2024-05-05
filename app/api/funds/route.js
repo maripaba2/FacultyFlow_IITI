@@ -3,9 +3,12 @@ import { connectToDB } from "@utils/database";
 
 export const GET = async (request) => {
     try {
-        await connectToDB()
+        const { searchParams } = new URL(request.url);
+        const user = searchParams.get('creator');
 
-        const funds = await Funds.find({}).populate('creator')
+        await connectToDB();
+
+        const funds = await Funds.find({creator: user});
 
         return new Response(JSON.stringify(funds), { status: 200 })
     } catch (error) {

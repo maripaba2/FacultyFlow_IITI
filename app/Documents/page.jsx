@@ -7,18 +7,15 @@ const page = () => {
   const [allPosts, setAllPosts] = useState([]);
 
   const fetchPosts = async () => {
-    const response = await fetch("/api/logs");
-    const fundsdata = await response.json();
-    const filteredPosts = fundsdata.filter(
-      (item) => item.creator?._id === session?.user?.id
-    );
-
+    const mid = await session?.user.id;
+    const response = await fetch(`/api/logs?creator=${mid}`);
+    const filteredPosts = await response.json();
     setAllPosts(filteredPosts);
   };
 
   useEffect(() => {
     fetchPosts();
-  });
+  }, [session]);
 
   return (
     <div>
@@ -35,18 +32,18 @@ const page = () => {
               <div className="flex flex-col ml-8">
                 <h1 className="mt-0 C3 font-bold text-x">{post.title}</h1>
                 <h3 className="text-sm font-semibold text-blue-900">
-                  Added/deleted :{post.entry}{" "}
+                  Added/Deleted: {post.entry}{" "}
                 </h3>
                 <h3 className="text-sm font-semibold text-blue-900">
-                  Type :{post.type}{" "}
+                  Type: {post.type}{" "}
                 </h3>
               </div>
               <div className="mt-6 mr-6">
                 <h3 className="text-sm font-semibold text-blue-900">
-                  Price:{post.price}{" "}
+                  Price: {post.price}{" "}
                 </h3>
                 <h3 className="text-sm font-semibold text-blue-900">
-                  Added/deleted on :{post.date}{" "}
+                  Added/Deleted On: {post.date}{" "}
                 </h3>
               </div>
             </div>
