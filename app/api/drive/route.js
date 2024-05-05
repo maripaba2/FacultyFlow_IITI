@@ -173,7 +173,7 @@ export async function POST(request) {
   console.log(head);
 
   let size = getSize(head);
-  if(size > 100000000){
+  if(size > 104857600){
     return NextResponse.json({ error: 'File too large.' }, { status: 500 });
   }
 
