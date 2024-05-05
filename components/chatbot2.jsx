@@ -3,13 +3,7 @@
 import { useState } from 'react'
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from "@chatscope/chat-ui-kit-react";
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-import {motion} from "framer-motion"
-const API_KEY = "AIzaSyDeMVFoz8gt4_N8Mmn41CpaEM2710f2ldI";
-const genAI = new GoogleGenerativeAI(API_KEY);
-
-const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
+import {motion} from "framer-motion";
 import { Inter } from "next/font/google";
 
 import "../app/globals.css";
@@ -60,10 +54,17 @@ export default function RootLayout({ children }) {
   };
 
   async function getQuery(chatMessages, newMs){
-    const message = await model.generateContent(chatMessages);
-  
+    const response = await fetch(`/api/chatbot`, {
+      method: "POST",
+      body: JSON.stringify({
+        messages: chatMessages   
+      }),
+    });
+
+    const data = await response.json();
+
     const newMessage = {
-      message: (message.response).text(),
+      message: data,
       sender: "FacultyBot",
       direction: "incoming"
     }

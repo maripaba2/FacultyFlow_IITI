@@ -18,7 +18,6 @@ export const GET = async (request, { params }) => {
 
 export const PATCH = async (request, { params }) => {
     const {title,place,deadline,type,price} = await request.json();
-   console.log('ok');
     try {
         await connectToDB();
 
@@ -34,12 +33,9 @@ export const PATCH = async (request, { params }) => {
         existingInventory.deadline=deadline;
         existingInventory.price=price;
         existingInventory.type=type;
-        
-             
-        
-        console.log('okie');
+
         await existingInventory.save();
-        console.log('okay');
+
         return new Response("Successfully updated the Inventory", { status: 200 });
     } catch (error) {
         console.log(error);

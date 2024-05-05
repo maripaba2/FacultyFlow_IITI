@@ -23,7 +23,8 @@ export default function RootLayout( props ) {
           { props.link && <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button> }
           { !props.link && <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">Upload</button> }
         </div>
-        <h2 style={{fontSize:"14px"}}>Location:{ props.place } </h2>
+
+        <h3 className="C3 text-xl font-bold mt-1.5 mr-5 text-nowrap">₹{ props.place }</h3>
       </div>
       <div className="z-10 flex justify-between bg-halka-laal duration-250 w-[7%] h-[100%] hover:bg-darker-halka-laal hover:duration-100 rounded-r-large border-2 border-dark-halka-laal">
         <button onClick={props.handleDelete}> 

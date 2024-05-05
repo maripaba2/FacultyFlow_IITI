@@ -24,16 +24,14 @@ const InventorySchema = new Schema({
  },
  type:{
     type:String,
-    required: [true, 'Price is required!']
+    required: [true, 'Type is required!']
  },
  
-
-
-
-
-
-
-  
+ link:{
+   type:String,
+   required: [true, 'Link is required!']
+},
+   
 });
 
 const Inventory = models.Inventory || model("Inventory", InventorySchema);
