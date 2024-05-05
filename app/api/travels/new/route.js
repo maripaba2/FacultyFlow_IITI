@@ -6,19 +6,14 @@ async function sendEmail(email) {
     const emailHtml = `
     <html>
     <head>
-        <title>Message from Message Bot</title>
+        <title>Message from Faculty Flow Team</title>
     </head>
     <body>
         <h1>Hello!</h1>
-        <p>This is a message from the Message Bot.</p>
-        <p>Here is some more information:</p>
-        <ul>
-            <li><strong>Department:</strong> k</li>
-            <li><strong>Name:</strong> l</li>
-            <li><strong>Amount:</strong> a</li>
-            <li><strong>Date:</strong> m</li>
-        </ul>
-        <p>Thank you!</p>
+        <p>This is a message from the Faculty Flow.</p>
+        <p>A gentle reminder to check whether you have received the funds for your latest leave.</p>
+        <p>Thank You!</p>
+        
     </body>
     </html>
 `;
@@ -45,6 +40,46 @@ async function sendEmail(email) {
         return new Response.json({ status: 500 })
       }
 }
+async function sendEmail2(email) {
+  const emailHtml = `
+  <html>
+  <head>
+      <title>Message from Faculty Flow Team</title>
+  </head>
+  <body>
+      <h1>Hello!</h1>
+      <p>This is a message from the Faculty Flow.</p>
+      <p>A gentle reminder to fill the form for Leaves at http://intranet.iiti.ac.in/.</p>
+      <p>Thank You!</p>
+      
+  </body>
+  </html>
+`;
+  const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: 'flowfaculty00@gmail.com',
+        pass: 'svdc ttzf fepc cidt'
+      }
+    })
+    try {
+      await transporter.sendMail({
+        from: '"Message bot" flowfaculty00@gmail.com', // sender address
+        to: email, // list of receivers
+        subject: 'Message from ', // Subject line
+        text: 'danger', // plain text body
+        html: emailHtml // html body
+      })
+      return new Response.json({ status: 200 })
+    } catch (err) {
+      console.log(err)
+      return new Response.json({ status: 500 })
+    }
+}
+
+
 
 // sendEmail().catch(console.error);
 // {const year = deadlineDate.getFullYear();
@@ -85,7 +120,7 @@ console.log("Date after 7 days:", newDateString);
   
   console.log(`${year}-${month}-${date1}`);
     cron.schedule(`00 17 ${date1} ${month} *`, () => {
-  sendEmail(email).catch(console.error);
+  sendEmail2(email).catch(console.error);
 
   
 }
@@ -107,5 +142,3 @@ cron.schedule(`00 17 ${newDay} ${newMonth} *`, () => {
         return new Response("Failed to create a new Fund", { status: 500 });
     }
 }
-
-
