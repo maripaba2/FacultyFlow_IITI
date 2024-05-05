@@ -39,14 +39,10 @@ const page = () => {
 
   const handleSubmit = async () => {
     const mid = await session?.user.id;
-    const response = await fetch(`/api/inventories/search?query=${query}`)
+    const response = await fetch(`/api/inventories/search?query=${query}&creator=${mid}`)
     const fundsdata = await response.json();
-    const filteredPosts = fundsdata.filter(
-      (item) => item.creator._id === mid
-    );
-    
-    setAllPosts(filteredPosts);
-    
+
+    setAllPosts(fundsdata);
    };
    useEffect(() => {
     handleSubmit();
@@ -103,7 +99,7 @@ const page = () => {
   };
   const updatePrompt = async (post) => {
     try {
-      const response = await fetch(`/api/inventories/${post._id.toString()}`, {
+      const response = await fetch(`/api/inventories/${post._id.toString()}&from=inventory`, {
         method: "PATCH",
         body: JSON.stringify({
           title:title,

@@ -15,7 +15,6 @@ const UpdatePrompt = () => {
 
  
     const getPromptDetails = async () => {
-      console.log('ved');
       const response = await fetch(`/api/inventories/${inventoriesId}`);
       console.log(response.body);
       const data =  response.body;
@@ -64,6 +63,8 @@ const UpdatePrompt = () => {
       setPost={setPost}
       submitting={submitting}
       handleSubmit={updatePrompt}
+      inventid = {inventoriesId}
+      from = "inventory"
     />
   );
 };
