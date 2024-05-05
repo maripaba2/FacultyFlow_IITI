@@ -50,7 +50,7 @@ const page = () => {
    };
    useEffect(() => {
     handleSubmit();
-  },[session]);
+  },[allPosts]);
   
 
   const handleDelete = async (post) => {
@@ -131,7 +131,7 @@ const page = () => {
     router.push(`/update-prompt?id=${post._id}`);
   };
   const handleUpload = (post) => {
-    router.push(`/upload-prompt?id=${post._id}&from=inventory`);
+    router.push(`/upload-prompt?id=${post._id}&from=inventory&title=${post.title}`);
   };
   const currentDate = new Date();
   const filteredPosts = allPosts

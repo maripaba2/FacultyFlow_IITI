@@ -35,14 +35,14 @@ async function auth(){
     return jwtClient;
 }
 
-async function upload(authClient){
+async function upload(authClient, userEmail) {
     return new Promise((resolve, rejected) => {
-        const drive = google.drive({version: 'v3', auth: authClient});
+        const drive = google.drive({ version: 'v3', auth: authClient });
 
         var fileMetaData = {
             name: name,
             parents: [fold[from]],
-        }
+        };
 
         drive.files.create({
             resource: fileMetaData,
@@ -50,14 +50,47 @@ async function upload(authClient){
                 body: fs.createReadStream(path),
             },
             fields: 'id'
-        }, function(err, file){
-            if(err){
+        }, async function (err, file) {
+            if (err) {
                 return rejected(err);
+            }
+
+            const fileId = file.data.id;
+            try {
+                await drive.permissions.create({
+                    fileId: fileId,
+                    requestBody: {
+                        role: 'writer',
+                        type: 'user',
+                        emailAddress: email
+                    }
+                });
+
+                await drive.permissions.create({
+                    fileId: fileId,
+                    requestBody: {
+                        role: 'reader',
+                        type: 'user',
+                        emailAddress: apikeys.client_email
+                    }
+                });
+                console.log('File shared and permissions set successfully');
+            } catch (error) {
+                console.error('Error sharing file and setting permissions:', error);
+            }
+
+            // Delete the file after sharing and setting permissions
+            try {
+                await fs.promises.unlink(path);
+                console.log('File deleted successfully');
+            } catch (error) {
+                console.error('Error deleting file:', error);
             }
             resolve(file);
         })
     })
 }
+
 
 function getName(head) {
     for(const [key, value] of head[Symbol.iterator]()){
@@ -109,6 +142,16 @@ function getFrom(head) {
     return null;
 }
 
+function getSize(head) {
+    for(const [key, value] of head[Symbol.iterator]()){
+        if(key == "content-length") {
+            return Number(value);
+        }
+    }
+
+    return null;
+}
+
 async function setLinkInvent(value){
     await connectToDB();
     const invent = await Invent.findOneAndUpdate({_id: id}, { link: value });
@@ -129,13 +172,18 @@ export async function POST(request) {
   const head = request.headers;
   console.log(head);
 
+  let size = getSize(head);
+  if(size > 100000000){
+    return NextResponse.json({ error: 'File too large.' }, { status: 500 });
+  }
+
   name = getName(head);
   id = getId(head);
   userid = getUserId(head);
-//   email = getEmail(head);
+  email = getEmail(head);
   from = getFrom(head);
 
-  path = join(process.cwd() + '/drive_server', name);
+  path = join(process.cwd() + '/drive_server', id + name);
   console.log(path);
 
   try {
@@ -155,8 +203,8 @@ export async function POST(request) {
 
   } catch (error) {
     console.error('Error saving file:', error);
-    return NextResponse.json({ error: 'Error saving file' }, { status: 500 });
+    return NextResponse.json({ error: 'Error saving file.' }, { status: 500 });
   }
 
-  return NextResponse.json({ message: "File saved successfully" }, { status: 200 }); 
+  return NextResponse.json({ message: "File saved successfully!" }, { status: 200 }); 
 };
