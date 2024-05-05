@@ -1,4 +1,5 @@
 "use client";
+import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import {
   Modal,
   ModalContent,
@@ -221,152 +222,180 @@ const page = () => {
   return (
     <div className="flex flex-wrap flex-row-reverse align-center justify-center mt-8">
       <div className="flex flex-col items-center ">
-        <div className="  ml-10  mt-10 flex flex-col align-center text-center justify-center bg-transparent border-3  sm:pl-3 sm:w-[20vw] border-yellow-400 rounded-l-large rounded-medium text-gray-700 w-[90%] items-center bg-yellow-200 ">
-          <h2>Department Balances:</h2>
-          <ul>
-            {Object.entries(departmentBalances).map(([department, balance]) => (
-              <li key={department}>
-                {department}: &#x20b9;{balance}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Card className="py-4 border border-yellow-500 pt-0">
+          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start bg-yellow-300">
+            <h4 className="font-bold text-large">Department Balances:</h4>
+          </CardHeader>
+          <CardBody className="overflow-visible py-2">
+            {/* <div className="  ml-10  mt-10 flex flex-col align-center text-center justify-center bg-transparent border-3  sm:pl-3 sm:w-[20vw] border-yellow-400 rounded-l-large rounded-medium text-gray-700 w-[90%] items-center bg-yellow-200 ">
+          <h2></h2>
+          
+        </div> */}
+
+            <ul>
+              {Object.entries(departmentBalances).map(
+                ([department, balance]) => (
+                  <li key={department}>
+                    {department}: &#x20b9;{balance}
+                  </li>
+                )
+              )}
+            </ul>
+          </CardBody>
+        </Card>
       </div>
 
-      <div className="flex flex-col "style={{left:"-5rem", position:"relative"}}>
+      <div
+        className="flex flex-col "
+        style={{ left: "-5rem", position: "relative" }}
+      >
         <div className="flex flex-row ">
-        <Button className=" bg-red-500 text-white" onPress={onOpen1}>Add Department</Button>
-        <Modal isOpen={isOpen1} onOpenChange={onOpenChange1}>
-          <ModalContent>
-            {(onClose) => (
-              <>
-                <ModalHeader className="flex flex-col gap-1">
-                  Modal Title
-                </ModalHeader>
-                <ModalBody>
-                  <form>
-                    <div className=" items-center justify-center flex flex-col sm:flex-col">
-                      <input
-                        className="h-[13vw] w-[30vw] sm:w-[18vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
-                        type="text"
-                        placeholder="Department"
-                        onChange={(e) => setDep(e.target.value)}
-                      />
-                      <input
-                        className="h-[13vw] w-[30vw] sm:w-[18vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 sm:mt-[2vw]"
-                        type="text"
-                        placeholder="Total"
-                        onChange={(e) => setTot(e.target.value)}
-                      />
-                      <Button
-                        onPress={onClose}
-                        className="h-[10vw] w-[25vw] sm:w-[11vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] "
-                        onClick={(e) => {
-                          createPrompt(e);
-                          onClose();
-                        }}
-                      >
-                        Add Department
-                      </Button>
-                      <Button color="danger" variant="light" onPress={onClose}>
-                        Close
-                      </Button>
-                    </div>
-                  </form>
-                </ModalBody>
-                <ModalFooter></ModalFooter>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
-
-        <Button className="mx-2 bg-red-500 text-white" onPress={onOpen2}>Add Funds</Button>
-        <Modal
-          isOpen={isOpen2}
-          onOpenChange={onOpenChange2}
-          isDismissable={false}
-          isKeyboardDismissDisabled={true}
-        >
-          <ModalContent>
-            {(onClose) => (
-              <>
-                <ModalHeader className="flex flex-col gap-1">
-                </ModalHeader>
-                <ModalBody>
-                  <form>
-                    <div className="flex align-center justify-center">
-                      <select
-                        value={selectedDepartment}
-                        onChange={handleSelectChange}
-                        className="w-45 h-15 mt-2  block sm:w-35 py-1 px-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                      >
-                        <option value="">Select a department</option>
-                        {allPosts.map((post, index) => (
-                          <option key={index} value={post.department}>
-                            {post.department}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className=" items-center justify-center flex flex-col ">
-                      <input
-                        className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
-                        type="text"
-                        placeholder="Name "
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                      <input
-                        className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
-                        type="text"
-                        placeholder="Amount "
-                        onChange={(e) => setAmount(e.target.value)}
-                      />
-                      <div className="flex flex-col pt-5 ">
-                        <DatePicker 
-                          selected={date}
-                          onChange={(date) => setDate(date)}
+          <Button className=" bg-red-500 text-white" onPress={onOpen1}>
+            Add Department
+          </Button>
+          <Modal isOpen={isOpen1} onOpenChange={onOpenChange1}>
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1">
+                    Modal Title
+                  </ModalHeader>
+                  <ModalBody>
+                    <form>
+                      <div className=" items-center justify-center flex flex-col sm:flex-col">
+                        <input
+                          className="h-[13vw] w-[30vw] sm:w-[18vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
+                          type="text"
+                          placeholder="Department"
+                          onChange={(e) => setDep(e.target.value)}
                         />
-                        <Button onPress={onClose}
-                          className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[1vw]"
+                        <input
+                          className="h-[13vw] w-[30vw] sm:w-[18vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 sm:mt-[2vw]"
+                          type="text"
+                          placeholder="Total"
+                          onChange={(e) => setTot(e.target.value)}
+                        />
+                        <Button
+                          onPress={onClose}
+                          className="h-[10vw] w-[25vw] sm:w-[11vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] "
                           onClick={(e) => {
-                            createPrompt2(e);
+                            createPrompt(e);
+                            onClose();
                           }}
                         >
-                          Add Funds{" "}
+                          Add Department
                         </Button>
-                        <Button color="danger" variant="light" onPress={onClose}>
-                        Close
-                      </Button>
+                        <Button
+                          color="danger"
+                          variant="light"
+                          onPress={onClose}
+                        >
+                          Close
+                        </Button>
                       </div>
-                    </div>
-                  </form>
-                </ModalBody>
-                <ModalFooter>{/* Footer for Modal 2 */}</ModalFooter>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
-        <div className="flex ">
-          <select
-            value={selectedDepartment2}
-            onChange={handleSelectChange2}
-            className="w-45 h-15 mt-2 mb-5 block sm:w-35 py-1 px-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                    </form>
+                  </ModalBody>
+                  <ModalFooter></ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+
+          <Button className="mx-2 bg-red-500 text-white" onPress={onOpen2}>
+            Add Funds
+          </Button>
+          <Modal
+            isOpen={isOpen2}
+            onOpenChange={onOpenChange2}
+            isDismissable={false}
+            isKeyboardDismissDisabled={true}
           >
-            <option value="" disabled hidden>
-              Select a department
-            </option>
-            {allPosts.map((post, index) => (
-              <option key={index} value={post.department}>
-                {post.department}
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1"></ModalHeader>
+                  <ModalBody>
+                    <form>
+                      <div className="flex align-center justify-center">
+                        <select
+                          value={selectedDepartment}
+                          onChange={handleSelectChange}
+                          className="w-45 h-15 mt-2  block sm:w-35 py-1 px-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                        >
+                          <option value="">Select a department</option>
+                          {allPosts.map((post, index) => (
+                            <option key={index} value={post.department}>
+                              {post.department}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className=" items-center justify-center flex flex-col ">
+                        <input
+                          className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
+                          type="text"
+                          placeholder="Name "
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                        <input
+                          className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
+                          type="text"
+                          placeholder="Amount "
+                          onChange={(e) => setAmount(e.target.value)}
+                        />
+                        <div className="flex flex-col pt-5 ">
+                          <DatePicker
+                            selected={date}
+                            onChange={(date) => setDate(date)}
+                          />
+                          <Button
+                            onPress={onClose}
+                            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[1vw]"
+                            onClick={(e) => {
+                              createPrompt2(e);
+                            }}
+                          >
+                            Add Funds{" "}
+                          </Button>
+                          <Button
+                            color="danger"
+                            variant="light"
+                            onPress={onClose}
+                          >
+                            Close
+                          </Button>
+                        </div>
+                      </div>
+                    </form>
+                  </ModalBody>
+                  <ModalFooter>{/* Footer for Modal 2 */}</ModalFooter>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+          <div className="flex ">
+            <select
+              value={selectedDepartment2}
+              onChange={handleSelectChange2}
+              className="w-45 h-15 mt-2 mb-5 block sm:w-35 py-1 px-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+            >
+              <option value="" disabled hidden>
+                Select a department
               </option>
-            ))}
-          </select>
+              {allPosts.map((post, index) => (
+                <option key={index} value={post.department}>
+                  {post.department}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        </div>
-        <hr class="border border-black-300 my-6" />
+        <hr class="border border-black-300 my-2" />
 
-
-        <div class="ml-[9vw] mt-3 flex align-center justify-center rounded-lg border border-gray-200 shadow-md w-[100%] sm:ml-[1vw]" style={{left:"-3rem", position:"relative"}}>
+        <div
+          class="ml-[9vw] mt-3 flex align-center justify-center rounded-lg border border-gray-200 shadow-md w-[100%] sm:ml-[1vw]"
+          style={{ left: "-3rem", position: "relative" }}
+        >
           <table class=" border-collapse bg-white text-left text-sm text-gray-500 w-[100%]">
             <thead class="bg-gray-50">
               <tr>
