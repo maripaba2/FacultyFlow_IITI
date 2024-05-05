@@ -19,7 +19,7 @@ const page = () => {
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedDepartment2, setSelectedDepartment2] = useState("");
   const [departmentBalances, setDepartmentBalances] = useState({});
-  
+
   const handleSelectChange = async (event) => {
     const value = await event.target.value;
     setSelectedDepartment(value);
@@ -48,10 +48,10 @@ const page = () => {
   useEffect(() => {
     handleSubmit();
     const balances = {};
-  
+
     allPosts.forEach((post) => {
       const price = parseFloat(post.price);
-      
+
       if (!isNaN(price)) {
         if (!balances[post.department]) {
           balances[post.department] = price;
@@ -75,7 +75,7 @@ const page = () => {
         console.log(`Invalid amount for post ${post._id}: ${post.amount}`);
       }
     });
-  
+
     setDepartmentBalances(balances);
   }, [allPosts]);
 
@@ -96,7 +96,6 @@ const page = () => {
       });
 
       if (response.ok) {
-
         router.push("/Demo");
       }
       console.log("please");
@@ -115,24 +114,24 @@ const page = () => {
         body: JSON.stringify({
           name: name,
           amount: amount,
-          date: date+1,
+          date: date + 1,
           userId: mid,
           department: selectedDepartment,
         }),
       });
 
-        const entry="Added";
-        const response2 = await fetch("/api/logs/new", {
-          method: "POST",
-          body: JSON.stringify({
-            userId: mid,
-            title: name,
-            type: selectedDepartment,
-            entry : entry,
-            price: amount,
-            date : new Date().toDateString()
-          }),
-        });
+      const entry = "Added";
+      const response2 = await fetch("/api/logs/new", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: mid,
+          title: name,
+          type: selectedDepartment,
+          entry: entry,
+          price: amount,
+          date: new Date().toDateString(),
+        }),
+      });
 
       console.log("hi");
     } catch (error) {
@@ -149,16 +148,16 @@ const page = () => {
           method: "DELETE",
         });
 
-        const entry="Deleted";
+        const entry = "Deleted";
         const response2 = await fetch("/api/logs/new", {
           method: "POST",
           body: JSON.stringify({
             userId: mid,
             title: post.name,
             type: post.department,
-            entry : entry,
+            entry: entry,
             price: post.amount,
-            date :new Date().toDateString()
+            date: new Date().toDateString(),
           }),
         });
 
@@ -197,26 +196,26 @@ const page = () => {
   };
   function formatDate(dateString) {
     const date = new Date(dateString);
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return date.toLocaleDateString("en-US", options);
   }
 
   return (
     <div className="flex flex-col align-center justify-center">
-      <div className="flex flex-col align-center justify-center">
-      {/* Your form and other JSX here */}
-      {/* Display department balances */}
-      <div>
-        <h2>Department Balances:</h2>
-        <ul>
-          {Object.entries(departmentBalances).map(([department, balance]) => (
-            <li key={department}>
-              {department}: &#x20b9;{balance}
-            </li>
-          ))}
-        </ul>
+      <div className="flex flex-col align-center justify-center items-center ">
+        <div className="    ml-4 flex flex-col align-center text-center justify-center bg-transparent border-3  sm:pl-3 border-yellow-400 rounded-l-large rounded-medium text-gray-700 w-[50%] items-center bg-yellow-200">
+          <h2>Department Balances:</h2>
+          <ul>
+            {Object.entries(departmentBalances).map(([department, balance]) => (
+              <li key={department}>
+                {department}: &#x20b9;{balance}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
+
+
       <form>
         <div className=" items-center justify-center flex flex-col sm:flex-row">
           <input
@@ -231,10 +230,8 @@ const page = () => {
             placeholder="Total"
             onChange={(e) => setTot(e.target.value)}
           />
-        </div>
-        <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center mt-5">
           <button
-            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[5vw]"
+            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] "
             onClick={(e) => {
               createPrompt(e);
             }}
@@ -243,21 +240,23 @@ const page = () => {
           </button>
         </div>
       </form>
-      <div className="flex align-center justify-center">
-        <select
-          value={selectedDepartment}
-          onChange={handleSelectChange}
-          className="w-45 h-15 mt-2 mb-5 block sm:w-35 py-1 px-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-        >
-          <option value="">Select a department</option>
-          {allPosts.map((post, index) => (
-            <option key={index} value={post.department}>
-              {post.department}
-            </option>
-          ))}
-        </select>
-      </div>
+
+      <hr class="border border-black-300 my-6" />
       <form>
+        <div className="flex align-center justify-center">
+          <select
+            value={selectedDepartment}
+            onChange={handleSelectChange}
+            className="w-45 h-15 mt-2 mb-5 block sm:w-35 py-1 px-2 border border-gray-300 bg-gray-50 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+          >
+            <option value="">Select a department</option>
+            {allPosts.map((post, index) => (
+              <option key={index} value={post.department}>
+                {post.department}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className=" items-center justify-center flex flex-col sm:flex-row">
           <input
             className="h-[13vw] w-[50vw] sm:w-[20vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 mt-[2vw]"
@@ -271,21 +270,32 @@ const page = () => {
             placeholder="Amount "
             onChange={(e) => setAmount(e.target.value)}
           />
-          
+          <div className="flex flex-col">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
-          
+            <button
+              className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[2vw]"
+              onClick={(e) => {
+                createPrompt2(e);
+              }}
+            >
+              Add Funds{" "}
+            </button>
+          </div>
         </div>
-        <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center">
-          <button
+        {/* <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center"> */}
+        {/* <button
             className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw]"
             onClick={(e) => {
               createPrompt2(e);
             }}
           >
             Add Funds{" "}
-          </button>
-        </div>
+          </button> */}
+        {/* </div> */}
       </form>
+
+      <hr class="border border-black-300 my-6" />
+
       <div className="flex align-center justify-center">
         <select
           value={selectedDepartment2}
@@ -302,7 +312,8 @@ const page = () => {
           ))}
         </select>
       </div>
-      <div class="ml-[9vw] mt-6 flex align-center justify-center rounded-lg border border-gray-200 shadow-md w-[100%] sm:ml-[1vw]">
+
+      <div class="ml-[9vw] mt-3 flex align-center justify-center rounded-lg border border-gray-200 shadow-md w-[100%] sm:ml-[1vw]">
         <table class=" border-collapse bg-white text-left text-sm text-gray-500 w-[100%]">
           <thead class="bg-gray-50">
             <tr>
@@ -328,7 +339,6 @@ const page = () => {
                     // <h1>{post.name}</h1>
                     <tr class="hover:bg-gray-50">
                       <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                       
                         <div class="text-sm">
                           <div class="font-medium text-gray-700">
                             {post.name}
