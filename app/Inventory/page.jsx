@@ -168,7 +168,7 @@ const page = () => {
                   <div className="w-[35%] translate-y-[32%] translate-x-[-30%] sm:translate-x-[-150%] sm:translate-y-[16%]">
 
                       <input onChange={(e) => setPlace(e.target.value)}  type='text' className="w-[80%] mb-0.5" placeholder="Place" required />
-                      <input onChange={(e) => setDeadline(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Deadline" required />
+                      <input onChange={(e) => setDeadline(e.target.value)} type='text' className="w-[180%] mb-0.5" placeholder="Deadline(yyyy/mm/dd)" required />
                      
                       <input onChange={(e) => setType(e.target.value)} type='text' className="w-[80%] mb-0.5" placeholder="Type" required />
                   </div>
@@ -203,7 +203,7 @@ const page = () => {
           {post.title}<br />
           
           Deadline: {post.deadline}<br />
-          Task: {post.type}
+         
         </section>
       </div>
     ))}

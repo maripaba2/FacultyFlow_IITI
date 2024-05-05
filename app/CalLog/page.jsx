@@ -4,19 +4,8 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const page = () => {
     const { data: session } = useSession();
-    const [allPosts, setAllPosts] = useState([]);
     const [link, setLink] = useState("");
     const [linkid, setLinkid] = useState("");
-
-    const fetchPosts = async () => {
-      const response = await fetch("/api/logs");
-      const fundsdata = await response.json();
-      const filteredPosts = fundsdata.filter(
-        (item) => item.creator?._id === session?.user?.id
-      );
-  
-      setAllPosts(filteredPosts);
-    };
 
     const fetchCalender = async () => {
       const response2 = await fetch("/api/callog");
@@ -74,34 +63,14 @@ const page = () => {
     };
 
     useEffect(() => {
-      fetchPosts();
       fetchCalender();
     });
 
   return (
     <div>
-        <div className="cardd">
-              {allPosts.map((post, index) => (
-                 <div className="relative z-50 shadow-md w-[45vw] h-[15vh] bg-gray-100 flex flex-col rounded-lg text-gray-700 hover:bg-gray-200 m-4 mt-7" style={{ width: "25rem", height: "4.6rem", borderRadius: "1rem" }}>
-     <div className="w-[100%] bg-transparent border-peela rounded-r-large rounded-l-large flex justify-between items-center px-4" style={{ borderWidth: "3px", height:"4.6rem" }}>
-    <div className="flex flex-col ml-8">
-       <h1 className="mt-0 C3 font-bold text-x">{post.title}</h1>
-      <h3 className="text-sm font-semibold text-blue-900">Added/deleted :{post.entry} </h3>
-      <h3 className="text-sm font-semibold text-blue-900">Type :{post.type} </h3>
-    </div>
-    <div className="mt-6 mr-6"> 
-      <h3 className="text-sm font-semibold text-blue-900">Price:{post.price} </h3>
-      <h3 className="text-sm font-semibold text-blue-900">Added/deleted on :{post.date} </h3>
-    </div>
-  </div>
-</div>
-
-                  
-              ))}
-            </div>
 
             <div>
-              <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center mt-5">
+              <div className="flex items-center justify-center sm:items-center sm:flex sm:justify-center mt-5 mb-5">
             <input
             className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] text-black border border-gray-400 rounded-small px-3 py-2 mx-3 focus:outline-none focus:border-blue-500 sm:mt-[2vw]"
             type="Calender link"
@@ -109,7 +78,7 @@ const page = () => {
             onChange={(e) => setLink(e.target.value)}
           />
           {!linkid && <button
-            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[5vw]"
+            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] "
             onClick={(e) => {
               createPrompt(e);
             }}
@@ -118,7 +87,7 @@ const page = () => {
           </button>}
           
           {linkid && <button
-            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] mb-[5vw]"
+            className="h-[10vw] w-[30vw] sm:w-[15vw] sm:h-[3vw] bg-red-500 text-white px-4 py-2 rounded-md border border-red-600 hover:bg-red-600 duration-200 mt-[2vw] "
             onClick={(e) => {
               handleDelete(e);
             }}

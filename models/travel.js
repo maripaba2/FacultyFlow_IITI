@@ -25,15 +25,7 @@ const TravelSchema = new Schema({
     type:String,
     required: [true, 'Type is required!']
  },
- comment:{
-    type:String,
-    required: [true, 'Comment is required!']
- },
  
- link:{
-    type:String,
-    
- }
 
 
 
