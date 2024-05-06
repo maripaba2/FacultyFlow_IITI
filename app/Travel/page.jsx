@@ -133,7 +133,7 @@ const page = () => {
           <br />
           <br />
           <div className="">
-          <ScrollShadow hideScrollBar className={`${roboto.className} dbcf w-[45vw] h-[50vh] relative `}>
+          <ScrollShadow hideScrollBar className={`${roboto.className} dbcf sm:w-[45vw] sm:h-[50vh] relative `}>
               {allPosts.map((post, index) => (
                 <>
                   <Detailbar key={post._id} arrival={post.arrival} place={post.place} title={post.title} departure={post.departure} link = {post.link}
@@ -178,7 +178,7 @@ const page = () => {
 
           </div>
         </div>
-        <div className="absolute right-5 mb-10 mr-10 translate-x-[-30%] translate-y-[-8%] flex flex-col justify-center items-center h-full">
+        <div className="right-5 m-auto mb-10 ml-40 translate-y-[-8%] flex flex-col justify-center items-center h-full">
           <Link href='https://www.iiti.ac.in/' className='black_btn mt-2 w-[14vw] h-[7vh] text-md'>
               IIT Indore
           </Link>

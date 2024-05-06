@@ -25,32 +25,24 @@ export default function RootLayout({ children }) {
     useEffect(() => {
         const checkDeadline = async () => {
             try {
-                const response = await fetch("/api/deadline");
+                const mid = await session?.user.id;
+                const response = await fetch(`/api/deadline&id=${mid}`);
                 const deadlineData = await response.json();
 
                 deadlineData.forEach(item => {
                     
                   const deadlineDate = new Date(item.deadlineDate);
                   const currentDate = new Date();
-
-                  // Calculate the start and end of the current week
-                  
-                  const startOfWeek = new Date(currentDate);
-                  // startOfWeek.setHours(0, 0, 0, 0 - currentDate.getDay()); // Set to the first day of the week (Sunday)
-                  
+                  const startOfWeek = new Date(currentDate);     
                   const endOfWeek = new Date(startOfWeek);
                   
-      endOfWeek.setDate(startOfWeek.getDate() + 7);
+                  endOfWeek.setDate(startOfWeek.getDate() + 7);
       
-
-                  // const endOfWeek = new Date(startOfWeek.getDate() + 7);
-                  // endOfWeek.setDate(startOfWeek.); // Set to the last day of the week (Saturday)
                   if (
                     deadlineDate >= startOfWeek &&
                     deadlineDate <= endOfWeek &&
                     !displayedFundIds.includes(item.fundId)
                 )
-                console.log('yeah');
                 {
                   {const year = deadlineDate.getFullYear();
                     const month = String(deadlineDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
@@ -66,7 +58,7 @@ export default function RootLayout({ children }) {
       };
 
       checkDeadline();
-  }, []);
+  }, [session]);
 
   return (
   <section className="appage w-full flex-center flex-col">
@@ -99,7 +91,7 @@ export default function RootLayout({ children }) {
     }
     <div className="flex justify-center items-center flex-wrap mt-8 w-[130%]">
     <div data-toggle="modal" data-target="#exampleModalLong">
-      <Link href = "/Travel">
+      <Link href = "/Travel" className="no-underline">
         <Card
           title="Leaves"
           subtitle="Subtitle 1"
@@ -111,7 +103,7 @@ export default function RootLayout({ children }) {
     </div>
 
     <div data-toggle="modal" data-target="#exampleModalLong">
-      <Link href = "/Demo">
+      <Link href = "/Demo" className="no-underline">
         <Card
           title="Funds"
           subtitle="Subtitle 2"
@@ -123,7 +115,7 @@ export default function RootLayout({ children }) {
     </div>
 
     <div  data-toggle="modal" data-target="#exampleModalLong">
-        <Link href = "/Inventory">
+        <Link href = "/Inventory" className="no-underline">
         <Card
           title="Inventory"
           subtitle="Subtitle 2"
@@ -136,7 +128,7 @@ export default function RootLayout({ children }) {
 
     
       <div  data-toggle="modal" data-target="#exampleModalLong">
-        <Link href = "/Documents">
+        <Link href = "/Documents" className="no-underline">
           <Card
             title="Logs"
             subtitle="Subtitle 2"

@@ -1,11 +1,13 @@
-import Inventory from "@models/inventory";
+import Invent from "@models/invent";
 import { connectToDB } from "@utils/database";
 
 export const GET = async (request) => {
     try {
         await connectToDB()
+        const { searchParams } = new URL(request.url);
+        const user = searchParams.get('creator');
 
-        const funds = await Inventory.find({}).populate('creator');
+        const funds = await Invent.find({user});
 
         const currentDate = new Date();
         // const currentMonth = currentDate.getMonth();
