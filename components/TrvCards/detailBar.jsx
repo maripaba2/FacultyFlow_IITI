@@ -24,11 +24,11 @@ export default function RootLayout( props ) {
             
         </div>
         <div className="flex translate-x-[-4%] mt-[10.5vh] z-10 m-auto" style={{zIndex:"10"}}>
-          <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250" onClick={props.handleEdit}>Edit</button>
-          { props.link && <a href = {url} target="_blank"><button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button></a> }
+          <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250 text-[1rem] px-1" onClick={props.handleEdit}>Edit</button>
+          { props.link && <a href = {url} target="_blank"><button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250 w-auto text-[1rem] px-1">View</button></a> }
           { !props.link && 
               // <UploadButton id = {props.id} email = {props.email} from = {props.w} userid = {props.userid} onClick={props.handleUpload}/>
-              <div className="inline-block rounded-md ml-2 duration-250 text-xs bg-peela text-gray-700 cursor-pointer hover:bg-amber-400" onClick={props.handleUpload}>Upload</div>
+              <div className="inline-block rounded-md ml-2 duration-250 text-sm text-center bg-peela text-gray-700 cursor-pointer hover:bg-amber-400 px-1" onClick={props.handleUpload}>Upload</div>
           }
         </div>
 
