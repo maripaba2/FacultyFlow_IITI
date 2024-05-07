@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 const { google } = require('googleapis');
 import { NextResponse } from "next/server";
 const fs = require('fs');
