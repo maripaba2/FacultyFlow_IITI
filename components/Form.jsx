@@ -35,8 +35,8 @@ const Form = ({ type, post, setPost, submitting, handleSubmit, inventid, from })
               <div>
                 <h1 className="text-xl font-bold mt-1.5 translate-x-4">$ <input  value={post.price}
             onChange={(e) => setPost({ ...post, price: e.target.value })} className="w-[50%] h-[1.5rem]" type='text' placeholder="/-" /></h1>
-                <div className="flex w-[30%] translate-x-[-190%] mt-[6.5vh]" >
-                  <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250" onClick = {changeUpload}>Edit Link</button>
+                <div className="w-[100%] mt-[5vh] text-md" >
+                  <button className="bg-peela hover:duration-100 hover:bg-halka-peela mr-2 rounded-md duration-250 p-0.5" onClick = {changeUpload}>Edit Link</button>
                   {/* <button className="bg-peela hover:duration-100 hover:bg-halka-peela ml-2 rounded-md duration-250">View</button> */}
                 </div>
               </div>       
