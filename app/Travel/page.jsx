@@ -179,13 +179,13 @@ const page = () => {
           </div>
         </div>
         <div className="right-5 m-auto mb-10 ml-40 translate-y-[-8%] flex flex-col justify-center items-center h-full">
-          <Link href='https://www.iiti.ac.in/' className='black_btn mt-2 w-[14vw] h-[7vh] text-md'>
+          <Link href='https://www.iiti.ac.in/' className='black_btn mt-2 w-[14vw] h-[7vh] text-md no-underline'>
               IIT Indore
           </Link>
-          <Link href='http://intranet.iiti.ac.in/' className='black_btn mt-2 w-[14vw] h-[7vh] text-md'>
+          <Link href='http://intranet.iiti.ac.in/' className='black_btn mt-2 w-[14vw] h-[7vh] text-md no-underline'>
               Leave Form
           </Link>
-          <Link href='http://me.iiti.ac.in/' className='black_btn mt-2 w-[14vw] h-[7vh] text-md'>
+          <Link href='http://me.iiti.ac.in/' className='black_btn mt-2 w-[14vw] h-[7vh] text-md no-underline'>
               ME Deparment
           </Link>
       </div>
